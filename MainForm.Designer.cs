@@ -1,6 +1,6 @@
 ﻿namespace final_programming_project
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
