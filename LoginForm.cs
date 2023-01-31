@@ -21,6 +21,16 @@ namespace final_programming_project
 
         public void Login()
         {
+            if (Input_Name.Text == "")
+            {
+                MessageBox.Show("Username parameter missing!");
+                return;
+            }
+            else if (Input_Password.Text == "")
+            {
+                MessageBox.Show("Password parameter missing!");
+                return;
+            }
             LoginResponse response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
             if (response == LoginResponse.SUCCESS)
             {
@@ -35,7 +45,7 @@ namespace final_programming_project
 
         private void LoginButtonClick(object sender, EventArgs e)
         {
-            Login();
+
         }
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
