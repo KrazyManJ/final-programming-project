@@ -17,16 +17,17 @@ namespace final_programming_project
             SqlConnection connection = new(connectionString);
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT passwordhash,passwordsalt FROM users WHERE name=@name";
+            cmd.CommandText = "SELECT passwordhash,passwordsalt,name FROM users WHERE name=@name";
             cmd.Parameters.AddWithValue("name", username);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {
                 HMACSHA512 hmac = new((byte[])reader[1]);
                 return hmac.ComputeHash(Encoding.UTF8.GetBytes(password)).SequenceEqual((byte[])reader[0])
-                    ? LoginResponse.SUCCESS : LoginResponse.PASSWORD_INCORRECT;
+                    ? new LoginResponse(new User(reader.GetString(2)),LoginStatus.SUCCESS)
+                    : new LoginResponse(null, LoginStatus.PASSWORD_INCORRECT);
             }
-            else return LoginResponse.USERNAME_NOT_EXIST;
+            else return new LoginResponse(null,LoginStatus.USERNAME_NOT_EXIST);
         }
         
         public static void RegisterUser(string username, string password)
@@ -42,11 +43,5 @@ namespace final_programming_project
             cmd.ExecuteNonQuery();
             sqlConnection.Close();
         }
-    }
-    public enum LoginResponse
-    {
-        SUCCESS,
-        PASSWORD_INCORRECT,
-        USERNAME_NOT_EXIST
     }
 }

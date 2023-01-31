@@ -13,7 +13,7 @@ namespace final_programming_project
             ApplicationConfiguration.Initialize();
             LoginForm form = new();
             Application.Run(form);
-            if (form.IsLoginSuccess()) Application.Run(new MainForm());
+            if (form.IsLoginSuccess()) Application.Run(new MainForm(form.User));
         }
     }
 }

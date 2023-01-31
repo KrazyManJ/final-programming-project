@@ -12,7 +12,9 @@ namespace final_programming_project
 {
     public partial class LoginForm : Form
     {
-        private bool Success = false;
+        private User? user = null;
+
+        public User User => user;
 
         public LoginForm()
         {
@@ -32,20 +34,25 @@ namespace final_programming_project
                 return;
             }
             LoginResponse response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
-            if (response == LoginResponse.SUCCESS)
+            if (response.Status == LoginStatus.SUCCESS)
             {
-                Success = true;
+                user = response.User;
                 Close();
             }
-            else if (response == LoginResponse.PASSWORD_INCORRECT) MessageBox.Show("Password is incorrect!");
-            else if (response == LoginResponse.USERNAME_NOT_EXIST) MessageBox.Show("Username is not registered!");
+            else if (response.Status == LoginStatus.PASSWORD_INCORRECT) MessageBox.Show("Password is incorrect!");
+            else if (response.Status == LoginStatus.USERNAME_NOT_EXIST) MessageBox.Show("Username is not registered!");
         }
 
-        public bool IsLoginSuccess() { return Success; }
+        public User? GetLoggedUser()
+        {
+            return this.user;
+        }
+
+        public bool IsLoginSuccess() { return this.user != null; }
 
         private void LoginButtonClick(object sender, EventArgs e)
         {
-
+            Login();
         }
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
