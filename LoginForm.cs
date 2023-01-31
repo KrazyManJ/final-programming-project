@@ -21,14 +21,14 @@ namespace final_programming_project
 
         public void Login()
         {
-            // Fixed values just for testing
-            if (Input_Name.Text == "admin" && Input_Password.Text == "root")
+            LoginResponse response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
+            if (response == LoginResponse.SUCCESS)
             {
                 Success = true;
                 Close();
             }
-            else MessageBox.Show("Password is incorrect!");
-            
+            else if (response == LoginResponse.PASSWORD_INCORRECT) MessageBox.Show("Password is incorrect!");
+            else if (response == LoginResponse.USERNAME_NOT_EXIST) MessageBox.Show("Username is not registered!");
         }
 
         public bool IsLoginSuccess() { return Success; }

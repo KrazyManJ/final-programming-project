@@ -12,6 +12,7 @@ namespace final_programming_project
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             LoginForm form = new();
+            //SQLManager.RegisterUser("admin", "root");
             Application.Run(form);
             if (form.IsLoginSuccess()) Application.Run(new MainForm());
         }
