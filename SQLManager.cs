@@ -17,19 +17,37 @@ namespace final_programming_project
             SqlConnection connection = new(connectionString);
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT passwordhash,passwordsalt,name FROM users WHERE name=@name";
+            cmd.CommandText = "SELECT passwordhash,passwordsalt,name,role FROM users WHERE name=@name";
             cmd.Parameters.AddWithValue("name", username);
             SqlDataReader reader = cmd.ExecuteReader();
+            LoginResponse response = new(null, LoginStatus.USERNAME_NOT_EXIST);
             if (reader.Read())
             {
                 HMACSHA512 hmac = new((byte[])reader[1]);
-                return hmac.ComputeHash(Encoding.UTF8.GetBytes(password)).SequenceEqual((byte[])reader[0])
-                    ? new LoginResponse(new User(reader.GetString(2)),LoginStatus.SUCCESS)
+                response = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)).SequenceEqual((byte[])reader[0])
+                    ? new LoginResponse(new User(reader.GetString(2),GetRoleByID(reader.GetInt32(3))),LoginStatus.SUCCESS)
                     : new LoginResponse(null, LoginStatus.PASSWORD_INCORRECT);
             }
-            else return new LoginResponse(null,LoginStatus.USERNAME_NOT_EXIST);
+            reader.Close();
+            connection.Close();
+            return response;
         }
         
+        public static Role GetRoleByID(int id) 
+        {
+            SqlConnection connection = new(connectionString);
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT * FROM roles WHERE id=@id";
+            cmd.Parameters.AddWithValue("id", id);
+            Role role = new("User", false);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read()) role = new Role(reader.GetString(1), reader.GetBoolean(2));
+            reader.Close();
+            connection.Close();
+            return role;
+        }
+
         public static void RegisterUser(string username, string password)
         {
             HMACSHA512 hmac = new();

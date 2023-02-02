@@ -33,14 +33,24 @@ namespace final_programming_project
                 MessageBox.Show("Password parameter missing!");
                 return;
             }
+            LoginButton.Enabled = false;
             LoginResponse response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
-            if (response.Status == LoginStatus.SUCCESS)
+            switch (response.Status)
             {
-                user = response.User;
-                Close();
-            }
-            else if (response.Status == LoginStatus.PASSWORD_INCORRECT) MessageBox.Show("Password is incorrect!");
-            else if (response.Status == LoginStatus.USERNAME_NOT_EXIST) MessageBox.Show("Username is not registered!");
+                case LoginStatus.SUCCESS:
+                    user = response.User;
+                    Close();
+                    break;
+                case LoginStatus.PASSWORD_INCORRECT:
+                    MessageBox.Show("Password is incorrect!");
+                    LoginButton.Enabled = true;
+                    break; 
+                case LoginStatus.USERNAME_NOT_EXIST:
+                    MessageBox.Show("Username is not registered!");
+                    LoginButton.Enabled = true;
+                    break;
+            } 
+
         }
 
         public User? GetLoggedUser()
