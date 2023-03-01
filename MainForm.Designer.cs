@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.UsernameLabel = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UsernameLabel
@@ -36,15 +37,26 @@
             this.UsernameLabel.AutoSize = true;
             this.UsernameLabel.Location = new System.Drawing.Point(17, 14);
             this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(50, 20);
+            this.UsernameLabel.Size = new System.Drawing.Size(74, 20);
             this.UsernameLabel.TabIndex = 0;
-            this.UsernameLabel.Text = "label1";
+            this.UsernameLabel.Text = "UserLabel";
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(17, 37);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(94, 29);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.UsernameLabel);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -56,5 +68,6 @@
         #endregion
 
         private Label UsernameLabel;
+        private Button btnLogout;
     }
 }

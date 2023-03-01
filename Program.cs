@@ -11,9 +11,20 @@ namespace final_programming_project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            LoginForm form = new();
-            Application.Run(form);
-            if (form.IsLoginSuccess()) Application.Run(new MainForm(form.User));
+            bool login = true;
+            do
+            {
+                login = false;
+                LoginForm form = new();
+                Application.Run(form);
+                if (form.IsLoginSuccess())
+                {
+                    MainForm main = new(form.User);
+                    Application.Run(main);
+                    if (main.Logout) login = true;
+                }
+            } while (login);
+            
         }
     }
 }
