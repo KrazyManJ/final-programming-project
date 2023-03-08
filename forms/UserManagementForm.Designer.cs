@@ -32,12 +32,13 @@
             id = new ColumnHeader();
             name = new ColumnHeader();
             role = new ColumnHeader();
+            regUserBtn = new Button();
             SuspendLayout();
             // 
             // userView
             // 
             userView.Columns.AddRange(new ColumnHeader[] { id, name, role });
-            userView.Location = new Point(26, 23);
+            userView.Location = new Point(12, 12);
             userView.Name = "userView";
             userView.Size = new Size(440, 274);
             userView.Sorting = SortOrder.Ascending;
@@ -60,11 +61,22 @@
             role.Text = "Role";
             role.Width = 326;
             // 
+            // regUserBtn
+            // 
+            regUserBtn.Location = new Point(12, 409);
+            regUserBtn.Name = "regUserBtn";
+            regUserBtn.Size = new Size(179, 29);
+            regUserBtn.TabIndex = 1;
+            regUserBtn.Text = "Register New User";
+            regUserBtn.UseVisualStyleBackColor = true;
+            regUserBtn.Click += regUserBtn_Click;
+            // 
             // UserManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(regUserBtn);
             Controls.Add(userView);
             Name = "UserManagementForm";
             Text = "UserManagementForm";
@@ -77,5 +89,6 @@
         private ColumnHeader id;
         private ColumnHeader name;
         private ColumnHeader role;
+        private Button regUserBtn;
     }
 }

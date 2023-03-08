@@ -1,4 +1,7 @@
-﻿namespace final_programming_project;
+﻿using final_programming_project.obj_str;
+using final_programming_project.src;
+
+namespace final_programming_project;
 
 public partial class LoginForm : Form
 {

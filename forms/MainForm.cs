@@ -1,3 +1,5 @@
+using final_programming_project.obj_str;
+
 namespace final_programming_project;
 
 public partial class MainForm : Form

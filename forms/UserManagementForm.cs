@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using final_programming_project.obj_str;
+using final_programming_project.src;
 
 namespace final_programming_project;
 
@@ -26,5 +28,10 @@ public partial class UserManagementForm : Form
             userView.Items.Add(item);
         }
         userView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+    }
+
+    private void regUserBtn_Click(object sender, EventArgs e)
+    {
+        new RegisterUserForm().ShowDialog();
     }
 }

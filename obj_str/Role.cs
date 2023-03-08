@@ -1,4 +1,4 @@
-﻿namespace final_programming_project;
+﻿namespace final_programming_project.obj_str;
 
 public class Role
 {

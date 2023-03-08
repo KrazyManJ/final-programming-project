@@ -1,8 +1,8 @@
-﻿namespace final_programming_project;
+﻿namespace final_programming_project.obj_str;
 
 public class User
 {
-    public User(int id,string name, Role role)
+    public User(int id, string name, Role role)
     {
         ID = id;
         Name = name;
