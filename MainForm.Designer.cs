@@ -28,46 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.UsernameLabel = new System.Windows.Forms.Label();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            UsernameLabel = new Label();
+            btnLogout = new Button();
+            mngUsersBtn = new Button();
+            SuspendLayout();
             // 
             // UsernameLabel
             // 
-            this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Location = new System.Drawing.Point(17, 14);
-            this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(74, 20);
-            this.UsernameLabel.TabIndex = 0;
-            this.UsernameLabel.Text = "UserLabel";
+            UsernameLabel.AutoSize = true;
+            UsernameLabel.Location = new Point(17, 14);
+            UsernameLabel.Name = "UsernameLabel";
+            UsernameLabel.Size = new Size(74, 20);
+            UsernameLabel.TabIndex = 0;
+            UsernameLabel.Text = "UserLabel";
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(17, 37);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(94, 29);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            btnLogout.Location = new Point(17, 37);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(94, 29);
+            btnLogout.TabIndex = 1;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
+            // mngUsersBtn
+            // 
+            mngUsersBtn.Location = new Point(675, 14);
+            mngUsersBtn.Name = "mngUsersBtn";
+            mngUsersBtn.Size = new Size(113, 29);
+            mngUsersBtn.TabIndex = 2;
+            mngUsersBtn.Text = "Manage Users";
+            mngUsersBtn.UseVisualStyleBackColor = true;
+            mngUsersBtn.Click += mngUsersBtn_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.UsernameLabel);
-            this.Name = "MainForm";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(mngUsersBtn);
+            Controls.Add(btnLogout);
+            Controls.Add(UsernameLabel);
+            Name = "MainForm";
+            Text = "Form1";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Label UsernameLabel;
         private Button btnLogout;
+        private Button mngUsersBtn;
     }
 }

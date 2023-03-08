@@ -1,72 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿namespace final_programming_project;
 
-namespace final_programming_project
+public partial class LoginForm : Form
 {
-    public partial class LoginForm : Form
+    private User? user;
+
+    public LoginForm()
     {
-        private User? user = null;
+        InitializeComponent();
+    }
 
-        public User User => user;
-
-        public LoginForm()
+    public void Login()
+    {
+        if (Input_Name.Text == "")
         {
-            InitializeComponent();
+            MessageBox.Show("Username parameter missing!");
+            return;
         }
 
-        public void Login()
+        if (Input_Password.Text == "")
         {
-            if (Input_Name.Text == "")
-            {
-                MessageBox.Show("Username parameter missing!");
-                return;
-            }
-            else if (Input_Password.Text == "")
-            {
-                MessageBox.Show("Password parameter missing!");
-                return;
-            }
-            LoginButton.Enabled = false;
-            LoginResponse response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
-            switch (response.Status)
-            {
-                case LoginStatus.SUCCESS:
-                    user = response.User;
-                    Close();
-                    break;
-                case LoginStatus.PASSWORD_INCORRECT:
-                    MessageBox.Show("Password is incorrect!");
-                    LoginButton.Enabled = true;
-                    break; 
-                case LoginStatus.USERNAME_NOT_EXIST:
-                    MessageBox.Show("Username is not registered!");
-                    LoginButton.Enabled = true;
-                    break;
-            } 
-
+            MessageBox.Show("Password parameter missing!");
+            return;
         }
 
-        public User? GetLoggedUser()
+        LoginButton.Enabled = false;
+        var response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
+        if (response.Status == LoginStatus.SUCCESS)
         {
-            return this.user;
+            user = response.User;
+            Close();
+            return;
         }
 
-        public bool IsLoginSuccess() { return this.user != null; }
+        if (response.Status == LoginStatus.PASSWORD_INCORRECT) MessageBox.Show("Password is incorrect!");
+        else if (response.Status == LoginStatus.USERNAME_NOT_EXIST) MessageBox.Show("Username is not registered!");
+        LoginButton.Enabled = true;
+    }
 
-        private void LoginButtonClick(object sender, EventArgs e)
-        {
-            Login();
-        }
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) Login();
-        }
+    public User? Exec()
+    {
+        Application.Run(this);
+        return user;
+    }
+
+    private void LoginButtonClick(object sender, EventArgs e)
+    {
+        if (LoginButton.Enabled) Login();
+    }
+
+    private void OnKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter && LoginButton.Enabled) Login();
     }
 }
