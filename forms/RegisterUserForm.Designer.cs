@@ -28,125 +28,136 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            InputUsername = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
+            InputPassword = new TextBox();
             label3 = new Label();
-            textBox3 = new TextBox();
+            InputConfirmPassword = new TextBox();
             label4 = new Label();
-            roleComboBox = new ComboBox();
-            button1 = new Button();
+            ComboBoxRole = new ComboBox();
+            RegisterButton = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // InputUsername
             // 
-            textBox1.Location = new Point(32, 53);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(280, 27);
-            textBox1.TabIndex = 0;
+            InputUsername.Location = new Point(32, 53);
+            InputUsername.Name = "InputUsername";
+            InputUsername.Size = new Size(280, 27);
+            InputUsername.TabIndex = 0;
+            InputUsername.TextChanged += UpdateRegisterBtnState;
+            InputUsername.KeyDown += OnKeyDown;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(32, 30);
             label1.Name = "label1";
-            label1.Size = new Size(75, 20);
+            label1.Size = new Size(129, 20);
             label1.TabIndex = 1;
-            label1.Text = "Username";
+            label1.Text = "Uživatelské jméno";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(32, 95);
             label2.Name = "label2";
-            label2.Size = new Size(70, 20);
+            label2.Size = new Size(47, 20);
             label2.TabIndex = 3;
-            label2.Text = "Password";
+            label2.Text = "Heslo";
             // 
-            // textBox2
+            // InputPassword
             // 
-            textBox2.Location = new Point(32, 118);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(280, 27);
-            textBox2.TabIndex = 2;
+            InputPassword.Location = new Point(32, 118);
+            InputPassword.Name = "InputPassword";
+            InputPassword.PasswordChar = '●';
+            InputPassword.Size = new Size(280, 27);
+            InputPassword.TabIndex = 2;
+            InputPassword.TextChanged += UpdateRegisterBtnState;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(32, 159);
             label3.Name = "label3";
-            label3.Size = new Size(127, 20);
+            label3.Size = new Size(90, 20);
             label3.TabIndex = 5;
-            label3.Text = "Confirm Password";
+            label3.Text = "Heslo znovu";
             // 
-            // textBox3
+            // InputConfirmPassword
             // 
-            textBox3.Location = new Point(32, 182);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(280, 27);
-            textBox3.TabIndex = 4;
+            InputConfirmPassword.Location = new Point(32, 182);
+            InputConfirmPassword.Name = "InputConfirmPassword";
+            InputConfirmPassword.PasswordChar = '●';
+            InputConfirmPassword.Size = new Size(280, 27);
+            InputConfirmPassword.TabIndex = 4;
+            InputConfirmPassword.TextChanged += UpdateRegisterBtnState;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(32, 229);
+            label4.Location = new Point(32, 224);
             label4.Name = "label4";
-            label4.Size = new Size(127, 20);
+            label4.Size = new Size(39, 20);
             label4.TabIndex = 7;
-            label4.Text = "Confirm Password";
+            label4.Text = "Role";
             // 
-            // roleComboBox
+            // ComboBoxRole
             // 
-            roleComboBox.FormattingEnabled = true;
-            roleComboBox.Location = new Point(32, 252);
-            roleComboBox.Name = "roleComboBox";
-            roleComboBox.Size = new Size(280, 28);
-            roleComboBox.TabIndex = 8;
+            ComboBoxRole.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxRole.FormattingEnabled = true;
+            ComboBoxRole.Location = new Point(32, 247);
+            ComboBoxRole.Name = "ComboBoxRole";
+            ComboBoxRole.Size = new Size(280, 28);
+            ComboBoxRole.TabIndex = 8;
+            ComboBoxRole.SelectedIndexChanged += UpdateRegisterBtnState;
             // 
-            // button1
+            // RegisterButton
             // 
-            button1.Location = new Point(77, 325);
-            button1.Name = "button1";
-            button1.Size = new Size(189, 29);
-            button1.TabIndex = 9;
-            button1.Text = "Register";
-            button1.UseVisualStyleBackColor = true;
+            RegisterButton.Location = new Point(77, 325);
+            RegisterButton.Name = "RegisterButton";
+            RegisterButton.Size = new Size(189, 29);
+            RegisterButton.TabIndex = 9;
+            RegisterButton.Text = "Registrovat uživatele";
+            RegisterButton.UseVisualStyleBackColor = true;
+            RegisterButton.Click += RegisterButton_Click;
             // 
             // RegisterUserForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(349, 366);
-            Controls.Add(button1);
-            Controls.Add(roleComboBox);
+            Controls.Add(RegisterButton);
+            Controls.Add(ComboBoxRole);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(textBox3);
+            Controls.Add(InputConfirmPassword);
             Controls.Add(label2);
-            Controls.Add(textBox2);
+            Controls.Add(InputPassword);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(InputUsername);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "RegisterUserForm";
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Register User";
+            Text = "Registrace uživatele";
+            KeyDown += OnKeyDown;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox InputUsername;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox InputPassword;
         private Label label3;
-        private TextBox textBox3;
+        private TextBox InputConfirmPassword;
         private Label label4;
-        private ComboBox roleComboBox;
-        private Button button1;
+        private ComboBox ComboBoxRole;
+        private Button RegisterButton;
     }
 }

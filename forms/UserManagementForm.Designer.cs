@@ -41,7 +41,6 @@
             userView.Location = new Point(12, 12);
             userView.Name = "userView";
             userView.Size = new Size(440, 274);
-            userView.Sorting = SortOrder.Ascending;
             userView.TabIndex = 0;
             userView.UseCompatibleStateImageBehavior = false;
             userView.View = View.Details;
@@ -53,7 +52,7 @@
             // 
             // name
             // 
-            name.Text = "Username";
+            name.Text = "Uživatelské jméno";
             name.Width = 78;
             // 
             // role
@@ -65,9 +64,9 @@
             // 
             regUserBtn.Location = new Point(12, 409);
             regUserBtn.Name = "regUserBtn";
-            regUserBtn.Size = new Size(179, 29);
+            regUserBtn.Size = new Size(238, 29);
             regUserBtn.TabIndex = 1;
-            regUserBtn.Text = "Register New User";
+            regUserBtn.Text = "Registrovat Nového Uživatele";
             regUserBtn.UseVisualStyleBackColor = true;
             regUserBtn.Click += regUserBtn_Click;
             // 
@@ -79,7 +78,7 @@
             Controls.Add(regUserBtn);
             Controls.Add(userView);
             Name = "UserManagementForm";
-            Text = "UserManagementForm";
+            Text = "Správá uživatelů";
             ResumeLayout(false);
         }
 

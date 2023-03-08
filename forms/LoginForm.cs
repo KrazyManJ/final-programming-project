@@ -10,24 +10,27 @@ public partial class LoginForm : Form
     public LoginForm()
     {
         InitializeComponent();
+        UpdateLoginBtnState(null, null);
+    }
+
+    public void UpdateLoginBtnState(object? sender, EventArgs? e)
+    {
+        var inputs = new[] { InputName, InputPassword };
+        foreach (var box in inputs)
+        {
+            if (box.Text == "")
+            {
+                LoginButton.Enabled = false;
+                return;
+            }
+        }
+        LoginButton.Enabled = true;
     }
 
     public void Login()
     {
-        if (Input_Name.Text == "")
-        {
-            MessageBox.Show("Username parameter missing!");
-            return;
-        }
-
-        if (Input_Password.Text == "")
-        {
-            MessageBox.Show("Password parameter missing!");
-            return;
-        }
-
         LoginButton.Enabled = false;
-        var response = SQLManager.CheckLoginData(Input_Name.Text, Input_Password.Text);
+        var response = SQLManager.CheckLoginData(InputName.Text, InputPassword.Text);
         if (response.Status == LoginStatus.SUCCESS)
         {
             user = response.User;

@@ -17,12 +17,16 @@ public partial class UserManagementForm : Form
     public UserManagementForm()
     {
         InitializeComponent();
+        UpdateUserView();
+    }
+
+    private void UpdateUserView()
+    {
+        userView.Items.Clear();
         foreach (User user in SQLManager.RegisteredUsers())
         {
-            ListViewItem item = new()
-            {
-                Text = user.ID.ToString()
-            };
+            ListViewItem item = new();
+            item.Text = user.ID.ToString();
             item.SubItems.Add(user.Name);
             item.SubItems.Add(user.Role.Name);
             userView.Items.Add(item);
@@ -33,5 +37,6 @@ public partial class UserManagementForm : Form
     private void regUserBtn_Click(object sender, EventArgs e)
     {
         new RegisterUserForm().ShowDialog();
+        UpdateUserView();
     }
 }

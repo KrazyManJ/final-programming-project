@@ -28,83 +28,84 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Input_Name = new System.Windows.Forms.TextBox();
-            this.Input_Password = new System.Windows.Forms.TextBox();
-            this.LoginButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            InputName = new TextBox();
+            InputPassword = new TextBox();
+            LoginButton = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            SuspendLayout();
             // 
             // Input_Name
             // 
-            this.Input_Name.Location = new System.Drawing.Point(26, 34);
-            this.Input_Name.Name = "Input_Name";
-            this.Input_Name.Size = new System.Drawing.Size(248, 27);
-            this.Input_Name.TabIndex = 0;
-            this.Input_Name.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
+            InputName.Location = new Point(26, 34);
+            InputName.Name = "Input_Name";
+            InputName.Size = new Size(248, 27);
+            InputName.TabIndex = 0;
+            InputName.TextChanged += UpdateLoginBtnState;
+            InputName.KeyDown += OnKeyDown;
             // 
             // Input_Password
             // 
-            this.Input_Password.Location = new System.Drawing.Point(26, 85);
-            this.Input_Password.Name = "Input_Password";
-            this.Input_Password.PasswordChar = '●';
-            this.Input_Password.Size = new System.Drawing.Size(248, 27);
-            this.Input_Password.TabIndex = 1;
-            this.Input_Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
+            InputPassword.Location = new Point(26, 85);
+            InputPassword.Name = "Input_Password";
+            InputPassword.PasswordChar = '●';
+            InputPassword.Size = new Size(248, 27);
+            InputPassword.TabIndex = 1;
+            InputPassword.TextChanged += UpdateLoginBtnState;
+            InputPassword.KeyDown += OnKeyDown;
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(100, 142);
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(94, 29);
-            this.LoginButton.TabIndex = 2;
-            this.LoginButton.Text = "Přihlásit se";
-            this.LoginButton.UseVisualStyleBackColor = true;
-            this.LoginButton.Click += new System.EventHandler(this.LoginButtonClick);
+            LoginButton.Location = new Point(100, 142);
+            LoginButton.Name = "LoginButton";
+            LoginButton.Size = new Size(94, 29);
+            LoginButton.TabIndex = 2;
+            LoginButton.Text = "Přihlásit se";
+            LoginButton.UseVisualStyleBackColor = true;
+            LoginButton.Click += LoginButtonClick;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Jméno";
+            label1.AutoSize = true;
+            label1.Location = new Point(29, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(52, 20);
+            label1.TabIndex = 3;
+            label1.Text = "Jméno";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Heslo";
+            label2.AutoSize = true;
+            label2.Location = new Point(29, 66);
+            label2.Name = "label2";
+            label2.Size = new Size(47, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Heslo";
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 197);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.LoginButton);
-            this.Controls.Add(this.Input_Password);
-            this.Controls.Add(this.Input_Name);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "LoginForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Přihlášení";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(311, 197);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(LoginButton);
+            Controls.Add(InputPassword);
+            Controls.Add(InputName);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Přihlášení";
+            KeyDown += OnKeyDown;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private TextBox Input_Name;
-        private TextBox Input_Password;
+        private TextBox InputName;
+        private TextBox InputPassword;
         private Button LoginButton;
         private Label label1;
         private Label label2;

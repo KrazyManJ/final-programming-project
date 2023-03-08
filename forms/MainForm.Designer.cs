@@ -48,17 +48,17 @@
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(94, 29);
             btnLogout.TabIndex = 1;
-            btnLogout.Text = "Logout";
+            btnLogout.Text = "Odhlásit se";
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
             // mngUsersBtn
             // 
-            mngUsersBtn.Location = new Point(675, 14);
+            mngUsersBtn.Location = new Point(651, 14);
             mngUsersBtn.Name = "mngUsersBtn";
-            mngUsersBtn.Size = new Size(113, 29);
+            mngUsersBtn.Size = new Size(137, 29);
             mngUsersBtn.TabIndex = 2;
-            mngUsersBtn.Text = "Manage Users";
+            mngUsersBtn.Text = "Správa uživatelů";
             mngUsersBtn.UseVisualStyleBackColor = true;
             mngUsersBtn.Click += mngUsersBtn_Click;
             // 
@@ -71,7 +71,7 @@
             Controls.Add(btnLogout);
             Controls.Add(UsernameLabel);
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Správa zakázek";
             ResumeLayout(false);
             PerformLayout();
         }

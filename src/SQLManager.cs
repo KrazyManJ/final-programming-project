@@ -7,13 +7,17 @@ namespace final_programming_project.src;
 
 public static class SQLManager
 {
-    private static readonly string connectionString =
+
+    private static readonly int DEFAULT_ROLE_ID = 1;
+    private static readonly string DEFAULT_ROLE_NAME = "user";
+
+    private static readonly string CONNECTION_STRING =
         @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=final-programming-project-db;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
 
     public static SqlConnection InitConnection()
     {
-        SqlConnection conn = new SqlConnection(connectionString);
+        SqlConnection conn = new SqlConnection(CONNECTION_STRING);
         conn.Open();
         return conn;
     }
@@ -69,16 +73,30 @@ public static class SQLManager
         connection.Close();
         return role;
     }
-
-    public static RegisterResponse RegisterUser(string username, string password)
+    public static int GetIdByRoleName(string roleName)
     {
+        SqlConnection connection = InitConnection();
+        var cmd = Command(connection, "SELECT id FROM roles WHERE name=@name");
+        cmd.Parameters.AddWithValue("name", roleName);
+        var reader = cmd.ExecuteReader();
+        int val = DEFAULT_ROLE_ID;
+        if (reader.Read()) val = reader.GetInt32(0);
+        reader.Close();
+        connection.Close();
+        return val;
+    }
+
+    public static RegisterResponse RegisterUser(string username, string password, string? role)
+    {
+        role ??= DEFAULT_ROLE_NAME;
         if (IsUserRegistered(username)) return RegisterResponse.ALREADY_EXISTS;
         HMACSHA512 hmac = new();
         SqlConnection connection = InitConnection();
-        var cmd = Command(connection, "INSERT INTO users (name,passwordhash,passwordsalt) VALUES (@name,@hash,@salt)");
+        var cmd = Command(connection, "INSERT INTO users (name,passwordhash,passwordsalt,role) VALUES (@name,@hash,@salt,@roleid)");
         cmd.Parameters.AddWithValue("name", username);
         cmd.Parameters.AddWithValue("hash", hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
         cmd.Parameters.AddWithValue("salt", hmac.Key);
+        cmd.Parameters.AddWithValue("roleid", GetIdByRoleName(role));
         cmd.ExecuteNonQuery();
         connection.Close();
         return RegisterResponse.SUCCESS;
