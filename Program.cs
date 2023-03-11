@@ -1,3 +1,5 @@
+using final_programming_project.src;
+
 namespace final_programming_project;
 
 internal static class Program

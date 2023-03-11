@@ -14,10 +14,9 @@ public static class SQLManager
     private static readonly string CONNECTION_STRING =
         @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=final-programming-project-db;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-
     public static SqlConnection InitConnection()
     {
-        SqlConnection conn = new SqlConnection(CONNECTION_STRING);
+        SqlConnection conn = new(CONNECTION_STRING);
         conn.Open();
         return conn;
     }
@@ -28,7 +27,7 @@ public static class SQLManager
         command.CommandText = commandText;
         return command;
     }
-
+    
     public static bool IsUserRegistered(string username)
     {
         SqlConnection connection = InitConnection();
@@ -122,6 +121,15 @@ public static class SQLManager
         List<Role> roles = new();
         while (reader.Read()) roles.Add(new Role(reader.GetString(1), reader.GetBoolean(2)));
         return roles;
+    }
+
+    public static void RemoveUserByID(int id)
+    {
+        SqlConnection connection = InitConnection();
+        SqlCommand cmd = Command(connection, "DELETE from users WHERE id=@id");
+        cmd.Parameters.AddWithValue("id", id);
+        cmd.ExecuteNonQuery();
+        connection.Close();
     }
 
 }

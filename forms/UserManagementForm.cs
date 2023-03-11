@@ -25,18 +25,54 @@ public partial class UserManagementForm : Form
         userView.Items.Clear();
         foreach (User user in SQLManager.RegisteredUsers())
         {
-            ListViewItem item = new();
-            item.Text = user.ID.ToString();
+            ListViewItem item = new()
+            {
+                Text = user.ID.ToString()
+            };
             item.SubItems.Add(user.Name);
             item.SubItems.Add(user.Role.Name);
             userView.Items.Add(item);
         }
-        userView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        UpdateButtons();
+    }
+
+    private void UpdateButtons()
+    {
+        EditBtn.Enabled = userView.SelectedIndices.Count == 1;
+        RemoveBtn.Enabled = userView.SelectedIndices.Count == 1;
     }
 
     private void regUserBtn_Click(object sender, EventArgs e)
     {
         new RegisterUserForm().ShowDialog();
         UpdateUserView();
+    }
+
+    private void UserSelectionChanged(object? sender, EventArgs? e)
+    {
+        UpdateButtons();
+    }
+
+    private void RemoveBtn_Click(object sender, EventArgs e)
+    {
+        if (userView.SelectedIndices.Count == 0) return;
+        ListViewItem item = userView.SelectedItems[0];
+        DialogResult response = MessageBox.Show(
+            "Opravdu chcete vymazat uživatele s ID '" + item.Text + "'?",
+            "Vymazání uživatele",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning
+        );
+        if (response == DialogResult.Yes)
+        {
+            SQLManager.RemoveUserByID(int.Parse(item.Text));
+            UpdateUserView();
+        }
+    }
+
+    private void EditBtn_Click(object sender, EventArgs e)
+    {
+        if (userView.SelectedIndices.Count == 0) return;
+
     }
 }
