@@ -17,4 +17,10 @@
         <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="forms\user_input\EditUserForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>

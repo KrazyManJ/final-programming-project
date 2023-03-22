@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using final_programming_project.obj_str;
+﻿using final_programming_project.obj_str;
 using final_programming_project.src;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace final_programming_project
 {
@@ -21,14 +11,14 @@ namespace final_programming_project
             foreach (Role role in SQLManager.RegisteredRoles())
                 ComboBoxRole.Items.Add(role.Name);
             ComboBoxRole.Text = "Zvol roli...";
-            UpdateRegisterBtnState(null, null);
+            UpdateActionButtonState();
         }
-
-        private void UpdateRegisterBtnState(object? sender, EventArgs? e)
+        
+        private void UpdateActionButtonState()
         {
             if (ComboBoxRole.SelectedItem == null)
             {
-                RegisterButton.Enabled = false;
+                ActionButton.Enabled = false;
                 return;
             }
             var inputs = new[] { InputUsername, InputPassword, InputConfirmPassword };
@@ -36,22 +26,26 @@ namespace final_programming_project
             {
                 if (box.Text == "")
                 {
-                    RegisterButton.Enabled = false;
+                    ActionButton.Enabled = false;
                     return;
                 }
             }
             if (InputPassword.Text != InputConfirmPassword.Text)
             {
-                RegisterButton.Enabled = false;
+                ActionButton.Enabled = false;
                 return;
             }
-            RegisterButton.Enabled = true;
+            ActionButton.Enabled = true;
         }
 
-        private void Register()
+        private void UnputChanged(object? sender, EventArgs? e)
         {
+            UpdateActionButtonState();
+        }
+
+        private void Register() {
             RegisterResponse response = SQLManager.RegisterUser(InputUsername.Text, InputPassword.Text, null);
-            if (response == RegisterResponse.ALREADY_EXISTS) 
+            if (response == RegisterResponse.ALREADY_EXISTS)
                 MessageBox.Show("Uživatel s tímto jménem již existuje!");
             else
             {
@@ -60,14 +54,14 @@ namespace final_programming_project
             }
         }
 
-        private void RegisterButton_Click(object sender, EventArgs e)
+        private void ActionButtonClick(object sender, EventArgs e)
         {
-            if (RegisterButton.Enabled) Register();
+            if (ActionButton.Enabled) Register();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && RegisterButton.Enabled) Register();
+            if (e.KeyCode == Keys.Enter && ActionButton.Enabled) Register();
         }
     }
 }

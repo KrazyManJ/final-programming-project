@@ -73,6 +73,9 @@ public partial class UserManagementForm : Form
     private void EditBtn_Click(object sender, EventArgs e)
     {
         if (userView.SelectedIndices.Count == 0) return;
-
+        ListViewItem item = userView.SelectedItems[0];
+        Role role = SQLManager.GetRoleByName(item.SubItems[2].Text);
+        new EditUserForm(new User(int.Parse(item.Text), item.SubItems[1].Text, role)).ShowDialog();
+        UpdateUserView();
     }
 }

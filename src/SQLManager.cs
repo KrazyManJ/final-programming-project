@@ -84,21 +84,58 @@ public static class SQLManager
         connection.Close();
         return val;
     }
+    public static Role GetRoleByName(string roleName)
+    {
+        return GetRoleByID(GetIdByRoleName(roleName));
+    }
+
+    private class PasswordHash
+    {
+        public byte[] Hash { get; set; }
+        public byte[] Salt { get; set; }
+
+        public PasswordHash(string password)
+        {
+            HMACSHA512 hmac = new();
+            Hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            Salt = hmac.Key;
+        }
+    }
 
     public static RegisterResponse RegisterUser(string username, string password, string? role)
     {
         role ??= DEFAULT_ROLE_NAME;
         if (IsUserRegistered(username)) return RegisterResponse.ALREADY_EXISTS;
-        HMACSHA512 hmac = new();
+        PasswordHash hash = new PasswordHash(password);
         SqlConnection connection = InitConnection();
         var cmd = Command(connection, "INSERT INTO users (name,passwordhash,passwordsalt,role) VALUES (@name,@hash,@salt,@roleid)");
         cmd.Parameters.AddWithValue("name", username);
-        cmd.Parameters.AddWithValue("hash", hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
-        cmd.Parameters.AddWithValue("salt", hmac.Key);
+        cmd.Parameters.AddWithValue("hash", hash.Hash);
+        cmd.Parameters.AddWithValue("salt", hash.Salt);
         cmd.Parameters.AddWithValue("roleid", GetIdByRoleName(role));
         cmd.ExecuteNonQuery();
         connection.Close();
         return RegisterResponse.SUCCESS;
+    }
+
+    public static void EditUser(int id, string name, string role, string? password = null)
+    {
+        SqlConnection connection = InitConnection();
+        var cmd = Command(connection, "UPDATE users SET name=@name,role=@role WHERE id=@id");
+        cmd.Parameters.AddWithValue("name", name);
+        cmd.Parameters.AddWithValue("role", GetIdByRoleName(role));
+        cmd.Parameters.AddWithValue("id", id);
+        MessageBox.Show("UPDATE users SET name=" + name + ",role=" + GetIdByRoleName(role) + " WHERE id=" + id);
+        cmd.ExecuteNonQuery();
+        if (password != null)
+        {
+            PasswordHash hash = new PasswordHash(password);
+            cmd = Command(connection, "UPDATE users SET passwordhash=@hash,passwordsalt=@salt WHERE id=@id");
+            cmd.Parameters.AddWithValue("hash", hash.Hash);
+            cmd.Parameters.AddWithValue("salt", hash.Salt);
+            cmd.Parameters.AddWithValue("id", id);
+            cmd.ExecuteNonQuery();
+        }
     }
 
     public static List<User> RegisteredUsers()

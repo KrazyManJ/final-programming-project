@@ -1,6 +1,6 @@
 ﻿namespace final_programming_project
 {
-    partial class RegisterUserForm
+    partial class EditUserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,8 @@
             InputConfirmPassword = new TextBox();
             label4 = new Label();
             ComboBoxRole = new ComboBox();
-            RegisterButton = new Button();
+            ActionButton = new Button();
+            ChangePassCheck = new CheckBox();
             SuspendLayout();
             // 
             // InputUsername
@@ -45,7 +46,7 @@
             InputUsername.Name = "InputUsername";
             InputUsername.Size = new Size(280, 27);
             InputUsername.TabIndex = 0;
-            InputUsername.TextChanged += UpdateRegisterBtnState;
+            InputUsername.TextChanged += UnputChanged;
             InputUsername.KeyDown += OnKeyDown;
             // 
             // label1
@@ -60,7 +61,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(32, 95);
+            label2.Location = new Point(32, 205);
             label2.Name = "label2";
             label2.Size = new Size(47, 20);
             label2.TabIndex = 3;
@@ -68,17 +69,18 @@
             // 
             // InputPassword
             // 
-            InputPassword.Location = new Point(32, 118);
+            InputPassword.Enabled = false;
+            InputPassword.Location = new Point(32, 228);
             InputPassword.Name = "InputPassword";
             InputPassword.PasswordChar = '●';
             InputPassword.Size = new Size(280, 27);
             InputPassword.TabIndex = 2;
-            InputPassword.TextChanged += UpdateRegisterBtnState;
+            InputPassword.TextChanged += UnputChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(32, 159);
+            label3.Location = new Point(32, 269);
             label3.Name = "label3";
             label3.Size = new Size(90, 20);
             label3.TabIndex = 5;
@@ -86,17 +88,18 @@
             // 
             // InputConfirmPassword
             // 
-            InputConfirmPassword.Location = new Point(32, 182);
+            InputConfirmPassword.Enabled = false;
+            InputConfirmPassword.Location = new Point(32, 292);
             InputConfirmPassword.Name = "InputConfirmPassword";
             InputConfirmPassword.PasswordChar = '●';
             InputConfirmPassword.Size = new Size(280, 27);
             InputConfirmPassword.TabIndex = 4;
-            InputConfirmPassword.TextChanged += UpdateRegisterBtnState;
+            InputConfirmPassword.TextChanged += UnputChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(32, 224);
+            label4.Location = new Point(32, 91);
             label4.Name = "label4";
             label4.Size = new Size(39, 20);
             label4.TabIndex = 7;
@@ -106,28 +109,40 @@
             // 
             ComboBoxRole.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxRole.FormattingEnabled = true;
-            ComboBoxRole.Location = new Point(32, 247);
+            ComboBoxRole.Location = new Point(32, 114);
             ComboBoxRole.Name = "ComboBoxRole";
             ComboBoxRole.Size = new Size(280, 28);
             ComboBoxRole.TabIndex = 8;
-            ComboBoxRole.SelectedIndexChanged += UpdateRegisterBtnState;
+            ComboBoxRole.SelectedIndexChanged += UnputChanged;
             // 
-            // RegisterButton
+            // ActionButton
             // 
-            RegisterButton.Location = new Point(77, 325);
-            RegisterButton.Name = "RegisterButton";
-            RegisterButton.Size = new Size(189, 29);
-            RegisterButton.TabIndex = 9;
-            RegisterButton.Text = "Registrovat uživatele";
-            RegisterButton.UseVisualStyleBackColor = true;
-            RegisterButton.Click += RegisterButton_Click;
+            ActionButton.Location = new Point(77, 368);
+            ActionButton.Name = "ActionButton";
+            ActionButton.Size = new Size(189, 29);
+            ActionButton.TabIndex = 9;
+            ActionButton.Text = "Upravit Uživatele";
+            ActionButton.UseVisualStyleBackColor = true;
+            ActionButton.Click += ActionButtonClick;
             // 
-            // RegisterUserForm
+            // ChangePassCheck
+            // 
+            ChangePassCheck.AutoSize = true;
+            ChangePassCheck.Location = new Point(32, 168);
+            ChangePassCheck.Name = "ChangePassCheck";
+            ChangePassCheck.Size = new Size(121, 24);
+            ChangePassCheck.TabIndex = 10;
+            ChangePassCheck.Text = "Upravit Heslo";
+            ChangePassCheck.UseVisualStyleBackColor = true;
+            ChangePassCheck.CheckedChanged += ChangePassCheckChanged;
+            // 
+            // EditUserForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(349, 366);
-            Controls.Add(RegisterButton);
+            ClientSize = new Size(349, 406);
+            Controls.Add(ChangePassCheck);
+            Controls.Add(ActionButton);
             Controls.Add(ComboBoxRole);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -139,25 +154,25 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "RegisterUserForm";
+            Name = "EditUserForm";
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Registrace uživatele";
+            Text = "Úprava Uživatele";
             KeyDown += OnKeyDown;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox InputUsername;
         private Label label1;
         private Label label2;
-        private TextBox InputPassword;
         private Label label3;
-        private TextBox InputConfirmPassword;
         private Label label4;
-        private ComboBox ComboBoxRole;
-        private Button RegisterButton;
+        private Button ActionButton;
+        internal TextBox InputUsername;
+        internal TextBox InputPassword;
+        internal TextBox InputConfirmPassword;
+        internal ComboBox ComboBoxRole;
+        private CheckBox ChangePassCheck;
     }
 }
