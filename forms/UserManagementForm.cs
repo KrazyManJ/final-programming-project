@@ -23,16 +23,7 @@ public partial class UserManagementForm : Form
     private void UpdateUserView()
     {
         userView.Items.Clear();
-        foreach (User user in SQLManager.RegisteredUsers())
-        {
-            ListViewItem item = new()
-            {
-                Text = user.ID.ToString()
-            };
-            item.SubItems.Add(user.Name);
-            item.SubItems.Add(user.Role.Name);
-            userView.Items.Add(item);
-        }
+        foreach (User user in SQLManager.RegisteredUsers()) userView.Items.Add(user.ToListViewItem());
         UpdateButtons();
     }
 
@@ -77,5 +68,10 @@ public partial class UserManagementForm : Form
         Role role = SQLManager.GetRoleByName(item.SubItems[2].Text);
         new EditUserForm(new User(int.Parse(item.Text), item.SubItems[1].Text, role)).ShowDialog();
         UpdateUserView();
+    }
+
+    private void userView_ColumnClick(object sender, ColumnClickEventArgs e)
+    {
+        //Sort implement
     }
 }

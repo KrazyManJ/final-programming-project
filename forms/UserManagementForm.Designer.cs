@@ -52,6 +52,7 @@
             userView.TabIndex = 0;
             userView.UseCompatibleStateImageBehavior = false;
             userView.View = View.Details;
+            userView.ColumnClick += userView_ColumnClick;
             userView.SelectedIndexChanged += UserSelectionChanged;
             // 
             // id

@@ -6,6 +6,7 @@
     [role]         INT              DEFAULT ((1)) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC),
     UNIQUE NONCLUSTERED ([name] ASC),
+    UNIQUE NONCLUSTERED ([name] ASC),
     FOREIGN KEY ([role]) REFERENCES [dbo].[roles] ([id])
 );
 

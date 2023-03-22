@@ -43,15 +43,15 @@ public static class SQLManager
     public static LoginResponse CheckLoginData(string username, string password)
     {
         SqlConnection connection = InitConnection();
-        SqlCommand cmd = Command(connection, "SELECT id,passwordhash,passwordsalt,name,role FROM users WHERE name=@name");
+        SqlCommand cmd = Command(connection, "SELECT * FROM users WHERE name=@name");
         cmd.Parameters.AddWithValue("name", username);
         var reader = cmd.ExecuteReader();
         LoginResponse response = new(null, LoginStatus.USERNAME_NOT_EXIST);
         if (reader.Read())
         {
-            HMACSHA512 hmac = new((byte[])reader[2]);
-            response = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)).SequenceEqual((byte[])reader[1])
-                ? new LoginResponse(new User(reader.GetInt32(0), reader.GetString(3), GetRoleByID(reader.GetInt32(4))), LoginStatus.SUCCESS)
+            PasswordHash pass = new PasswordHash(password, (byte[])reader[3]);
+            response = pass.Hash.SequenceEqual((byte[])reader[2])
+                ? new LoginResponse(new User(reader), LoginStatus.SUCCESS)
                 : new LoginResponse(null, LoginStatus.PASSWORD_INCORRECT);
         }
 
@@ -89,19 +89,6 @@ public static class SQLManager
         return GetRoleByID(GetIdByRoleName(roleName));
     }
 
-    private class PasswordHash
-    {
-        public byte[] Hash { get; set; }
-        public byte[] Salt { get; set; }
-
-        public PasswordHash(string password)
-        {
-            HMACSHA512 hmac = new();
-            Hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            Salt = hmac.Key;
-        }
-    }
-
     public static RegisterResponse RegisterUser(string username, string password, string? role)
     {
         role ??= DEFAULT_ROLE_NAME;
@@ -125,7 +112,6 @@ public static class SQLManager
         cmd.Parameters.AddWithValue("name", name);
         cmd.Parameters.AddWithValue("role", GetIdByRoleName(role));
         cmd.Parameters.AddWithValue("id", id);
-        MessageBox.Show("UPDATE users SET name=" + name + ",role=" + GetIdByRoleName(role) + " WHERE id=" + id);
         cmd.ExecuteNonQuery();
         if (password != null)
         {
@@ -144,7 +130,7 @@ public static class SQLManager
         var cmd = Command(connection, "SELECT * FROM users");
         SqlDataReader reader = cmd.ExecuteReader();
         List<User> users = new();
-        while (reader.Read()) users.Add(new User(reader.GetInt32(0), reader.GetString(1), GetRoleByID(reader.GetInt32(4))));
+        while (reader.Read()) users.Add(new User(reader));
         reader.Close();
         connection.Close();
         return users;
@@ -156,7 +142,7 @@ public static class SQLManager
         SqlCommand cmd = Command(connection, "SELECT * FROM roles");
         SqlDataReader reader = cmd.ExecuteReader();
         List<Role> roles = new();
-        while (reader.Read()) roles.Add(new Role(reader.GetString(1), reader.GetBoolean(2)));
+        while (reader.Read()) roles.Add(new Role(reader));
         return roles;
     }
 
@@ -175,4 +161,18 @@ public enum RegisterResponse
 {
     SUCCESS,
     ALREADY_EXISTS
+}
+
+internal class PasswordHash
+{
+    public byte[] Hash { get; set; }
+    public byte[] Salt { get; set; }
+
+    public PasswordHash(string password, byte[]? salt = null)
+    {
+        HMACSHA512 hmac = new();
+        if (salt != null) hmac.Key = salt;
+        Hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+        Salt = hmac.Key;
+    }
 }

@@ -76,6 +76,7 @@
             InputPassword.Size = new Size(280, 27);
             InputPassword.TabIndex = 2;
             InputPassword.TextChanged += UnputChanged;
+            InputPassword.KeyDown += OnKeyDown;
             // 
             // label3
             // 
@@ -95,6 +96,7 @@
             InputConfirmPassword.Size = new Size(280, 27);
             InputConfirmPassword.TabIndex = 4;
             InputConfirmPassword.TextChanged += UnputChanged;
+            InputConfirmPassword.KeyDown += OnKeyDown;
             // 
             // label4
             // 
@@ -114,6 +116,7 @@
             ComboBoxRole.Size = new Size(280, 28);
             ComboBoxRole.TabIndex = 8;
             ComboBoxRole.SelectedIndexChanged += UnputChanged;
+            ComboBoxRole.KeyDown += OnKeyDown;
             // 
             // ActionButton
             // 
@@ -135,6 +138,7 @@
             ChangePassCheck.Text = "Upravit Heslo";
             ChangePassCheck.UseVisualStyleBackColor = true;
             ChangePassCheck.CheckedChanged += ChangePassCheckChanged;
+            ChangePassCheck.KeyDown += OnKeyDown;
             // 
             // EditUserForm
             // 

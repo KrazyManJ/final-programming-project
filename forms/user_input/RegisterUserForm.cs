@@ -8,8 +8,7 @@ namespace final_programming_project
         public RegisterUserForm()
         {
             InitializeComponent();
-            foreach (Role role in SQLManager.RegisteredRoles())
-                ComboBoxRole.Items.Add(role.Name);
+            foreach (Role role in SQLManager.RegisteredRoles()) ComboBoxRole.Items.Add(role.Name);
             ComboBoxRole.Text = "Zvol roli...";
             UpdateActionButtonState();
         }
