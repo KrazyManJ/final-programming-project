@@ -1,33 +1,37 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using final_programming_project.obj_str;
+﻿using final_programming_project.obj_str;
 using final_programming_project.src;
 using final_programming_project.utils;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace final_programming_project;
 
 public partial class UserManagementForm : Form
 {
+    private List<User> users = new List<User>();
+
     public UserManagementForm()
     {
         InitializeComponent();
-        UpdateUserView();
-        this.UserListView.ListViewItemSorter = lvwColumnSorter;
+        UpdateUserView(true);
+        UserListView.ListViewItemSorter = lvwColumnSorter;
+
     }
 
-    private void UpdateUserView()
+    private void UpdateUserView(bool loadData = false)
     {
+        if (loadData)
+        {
+            users = SQLManager.RegisteredUsers();
+            ComboBoxRole.Items.Clear();
+            ComboBoxRole.Items.Add("Všechny");
+            foreach (var role in SQLManager.RegisteredRoles()) ComboBoxRole.Items.Add(role.Name);
+            ComboBoxRole.SelectedIndex = 0;
+        }
         UserListView.Items.Clear();
-        foreach (User user in SQLManager.RegisteredUsers()) UserListView.Items.Add(user.ToListViewItem());
+        foreach (User user in users)
+        {
+            if ((user.Role.Name == ComboBoxRole.Text || ComboBoxRole.SelectedIndex == 0) && user.Name.Contains(SearchInput.Text))
+                UserListView.Items.Add(user.ToListViewItem());
+        }
         UpdateButtons();
     }
 
@@ -40,7 +44,7 @@ public partial class UserManagementForm : Form
     private void regUserBtn_Click(object sender, EventArgs e)
     {
         new RegisterUserForm().ShowDialog();
-        UpdateUserView();
+        UpdateUserView(true);
     }
 
     private void UserSelectionChanged(object? sender, EventArgs? e)
@@ -61,7 +65,7 @@ public partial class UserManagementForm : Form
         if (response == DialogResult.Yes)
         {
             SQLManager.RemoveUserByID(int.Parse(item.Text));
-            UpdateUserView();
+            UpdateUserView(true);
         }
     }
 
@@ -71,15 +75,12 @@ public partial class UserManagementForm : Form
         ListViewItem item = UserListView.SelectedItems[0];
         Role role = SQLManager.GetRoleByName(item.SubItems[2].Text);
         new EditUserForm(new User(int.Parse(item.Text), item.SubItems[1].Text, role)).ShowDialog();
-        UpdateUserView();
+        UpdateUserView(true);
     }
-
-
-    
 
     private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
-    private void userView_ColumnClick(object sender, ColumnClickEventArgs e)
+    private void ColumnClick(object sender, ColumnClickEventArgs e)
     {
         string ARROWUP = "↑";
         string ARROWDOWN = "↓";
@@ -89,7 +90,6 @@ public partial class UserManagementForm : Form
         }
         if (e.Column == lvwColumnSorter.SortColumn)
         {
-            // Reverse the current sort direction for this column.
             if (lvwColumnSorter.Order == SortOrder.Ascending)
             {
                 lvwColumnSorter.Order = SortOrder.Descending;
@@ -100,7 +100,7 @@ public partial class UserManagementForm : Form
             {
                 lvwColumnSorter.Order = SortOrder.Ascending;
                 ColumnHeader h = UserListView.Columns[e.Column];
-                h.Text += " "+ARROWDOWN;
+                h.Text += " " + ARROWDOWN;
             }
         }
         else
@@ -111,5 +111,20 @@ public partial class UserManagementForm : Form
             h.Text += " " + ARROWDOWN;
         }
         UserListView.Sort();
+    }
+
+    private void UpdateDataButton_Click(object sender, EventArgs e)
+    {
+        UpdateUserView(true);
+    }
+
+    private void ComboBoxRole_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        UpdateUserView();
+    }
+
+    private void SearchInput_TextChanged(object sender, EventArgs e)
+    {
+        UpdateUserView();
     }
 }

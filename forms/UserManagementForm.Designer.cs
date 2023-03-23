@@ -36,23 +36,28 @@
             EditBtn = new Button();
             RemoveBtn = new Button();
             panel1 = new Panel();
+            SearchInput = new TextBox();
+            label1 = new Label();
+            ComboBoxRole = new ComboBox();
+            UpdateDataButton = new Button();
+            RoleFilterLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // userView
+            // UserListView
             // 
             UserListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             UserListView.Columns.AddRange(new ColumnHeader[] { id, name, role });
             UserListView.FullRowSelect = true;
-            UserListView.Location = new Point(10, 10);
+            UserListView.Location = new Point(10, 55);
             UserListView.Margin = new Padding(10);
             UserListView.MultiSelect = false;
-            UserListView.Name = "userView";
-            UserListView.Size = new Size(780, 385);
+            UserListView.Name = "UserListView";
+            UserListView.Size = new Size(780, 340);
             UserListView.TabIndex = 0;
             UserListView.UseCompatibleStateImageBehavior = false;
             UserListView.View = View.Details;
-            UserListView.ColumnClick += userView_ColumnClick;
+            UserListView.ColumnClick += ColumnClick;
             UserListView.SelectedIndexChanged += UserSelectionChanged;
             // 
             // id
@@ -115,11 +120,62 @@
             panel1.Size = new Size(780, 40);
             panel1.TabIndex = 4;
             // 
+            // SearchInput
+            // 
+            SearchInput.Location = new Point(144, 13);
+            SearchInput.Name = "SearchInput";
+            SearchInput.Size = new Size(125, 27);
+            SearchInput.TabIndex = 5;
+            SearchInput.TextChanged += SearchInput_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(10, 17);
+            label1.Name = "label1";
+            label1.Size = new Size(133, 20);
+            label1.TabIndex = 6;
+            label1.Text = "Vyhledat uživatele:";
+            // 
+            // ComboBoxRole
+            // 
+            ComboBoxRole.FormattingEnabled = true;
+            ComboBoxRole.Location = new Point(383, 13);
+            ComboBoxRole.Name = "ComboBoxRole";
+            ComboBoxRole.Size = new Size(151, 28);
+            ComboBoxRole.TabIndex = 7;
+            ComboBoxRole.SelectedIndexChanged += ComboBoxRole_SelectedIndexChanged;
+            // 
+            // UpdateDataButton
+            // 
+            UpdateDataButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UpdateDataButton.Location = new Point(633, 12);
+            UpdateDataButton.Name = "UpdateDataButton";
+            UpdateDataButton.Size = new Size(157, 29);
+            UpdateDataButton.TabIndex = 8;
+            UpdateDataButton.Text = "Aktualizovat Data";
+            UpdateDataButton.UseVisualStyleBackColor = true;
+            UpdateDataButton.Click += UpdateDataButton_Click;
+            // 
+            // RoleFilterLabel
+            // 
+            RoleFilterLabel.AutoSize = true;
+            RoleFilterLabel.Location = new Point(281, 17);
+            RoleFilterLabel.Name = "RoleFilterLabel";
+            RoleFilterLabel.Size = new Size(100, 20);
+            RoleFilterLabel.TabIndex = 9;
+            RoleFilterLabel.Text = "Filtrovat Role:";
+            // 
             // UserManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(RoleFilterLabel);
+            Controls.Add(UpdateDataButton);
+            Controls.Add(ComboBoxRole);
+            Controls.Add(label1);
+            Controls.Add(SearchInput);
             Controls.Add(panel1);
             Controls.Add(UserListView);
             MinimumSize = new Size(600, 240);
@@ -128,6 +184,7 @@
             Text = "Správá uživatelů";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -140,5 +197,10 @@
         private Button EditBtn;
         private Button RemoveBtn;
         private Panel panel1;
+        private TextBox SearchInput;
+        private Label label1;
+        private ComboBox ComboBoxRole;
+        private Button UpdateDataButton;
+        private Label RoleFilterLabel;
     }
 }
