@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace final_programming_project.utils
+namespace final_programming_project.Toolbox
 {
     public class ListViewColumnSorter : IComparer
     {
@@ -21,7 +21,7 @@ namespace final_programming_project.utils
             OrderOfSort = SortOrder.None;
             ObjectCompare = new CaseInsensitiveComparer();
         }
-        
+
         public int Compare(object? x, object? y)
         {
             if (x == null || y == null) return 0;
@@ -64,6 +64,53 @@ namespace final_programming_project.utils
             {
                 return OrderOfSort;
             }
+        }
+    }
+
+    public class SortableListView : ListView
+    {
+        private readonly string ARROWUP = "▲";
+        private readonly string ARROWDOWN = "▼";
+        private readonly string SPACING = "    ";
+
+        private ListViewColumnSorter sorter = new ListViewColumnSorter();
+
+        public SortableListView() : base()
+        {
+            ListViewItemSorter = sorter;
+            ColumnClick += Sort;
+        }
+
+        private void Sort(object? sender, ColumnClickEventArgs? e)
+        {
+            
+            foreach (ColumnHeader col in this.Columns)
+            {
+                if (col.Text.EndsWith(ARROWUP) || col.Text.EndsWith(ARROWDOWN)) col.Text = col.Text[..^(SPACING.Length+1)];
+            }
+            if (e.Column == sorter.SortColumn)
+            {
+                if (sorter.Order == SortOrder.Ascending)
+                {
+                    sorter.Order = SortOrder.Descending;
+                    ColumnHeader h = Columns[e.Column];
+                    h.Text += SPACING + ARROWUP;
+                }
+                else
+                {
+                    sorter.Order = SortOrder.Ascending;
+                    ColumnHeader h = Columns[e.Column];
+                    h.Text += SPACING + ARROWDOWN;
+                }
+            }
+            else
+            {
+                sorter.SortColumn = e.Column;
+                sorter.Order = SortOrder.Ascending;
+                ColumnHeader h = Columns[e.Column];
+                h.Text += SPACING + ARROWDOWN;
+            }
+            Sort();
         }
     }
 }

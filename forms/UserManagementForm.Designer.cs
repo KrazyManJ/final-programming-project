@@ -1,4 +1,6 @@
-﻿namespace final_programming_project
+﻿using final_programming_project.Toolbox;
+
+namespace final_programming_project
 {
     partial class UserManagementForm
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            UserListView = new ListView();
+            UserListView = new SortableListView();
             id = new ColumnHeader();
             name = new ColumnHeader();
             role = new ColumnHeader();
@@ -57,7 +59,6 @@
             UserListView.TabIndex = 0;
             UserListView.UseCompatibleStateImageBehavior = false;
             UserListView.View = View.Details;
-            UserListView.ColumnClick += ColumnClick;
             UserListView.SelectedIndexChanged += UserSelectionChanged;
             // 
             // id

@@ -1,6 +1,5 @@
 ﻿using final_programming_project.obj_str;
 using final_programming_project.src;
-using final_programming_project.utils;
 
 namespace final_programming_project;
 
@@ -12,8 +11,6 @@ public partial class UserManagementForm : Form
     {
         InitializeComponent();
         UpdateUserView(true);
-        UserListView.ListViewItemSorter = lvwColumnSorter;
-
     }
 
     private void UpdateUserView(bool loadData = false)
@@ -76,41 +73,6 @@ public partial class UserManagementForm : Form
         Role role = SQLManager.GetRoleByName(item.SubItems[2].Text);
         new EditUserForm(new User(int.Parse(item.Text), item.SubItems[1].Text, role)).ShowDialog();
         UpdateUserView(true);
-    }
-
-    private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-
-    private void ColumnClick(object sender, ColumnClickEventArgs e)
-    {
-        string ARROWUP = "↑";
-        string ARROWDOWN = "↓";
-        foreach (ColumnHeader col in UserListView.Columns)
-        {
-            if (col.Text.EndsWith(ARROWUP) || col.Text.EndsWith(ARROWDOWN)) col.Text = col.Text[..^2];
-        }
-        if (e.Column == lvwColumnSorter.SortColumn)
-        {
-            if (lvwColumnSorter.Order == SortOrder.Ascending)
-            {
-                lvwColumnSorter.Order = SortOrder.Descending;
-                ColumnHeader h = UserListView.Columns[e.Column];
-                h.Text += " " + ARROWUP;
-            }
-            else
-            {
-                lvwColumnSorter.Order = SortOrder.Ascending;
-                ColumnHeader h = UserListView.Columns[e.Column];
-                h.Text += " " + ARROWDOWN;
-            }
-        }
-        else
-        {
-            lvwColumnSorter.SortColumn = e.Column;
-            lvwColumnSorter.Order = SortOrder.Ascending;
-            ColumnHeader h = UserListView.Columns[e.Column];
-            h.Text += " " + ARROWDOWN;
-        }
-        UserListView.Sort();
     }
 
     private void UpdateDataButton_Click(object sender, EventArgs e)
