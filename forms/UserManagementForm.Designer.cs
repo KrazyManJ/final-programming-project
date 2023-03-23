@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            userView = new ListView();
+            UserListView = new ListView();
             id = new ColumnHeader();
             name = new ColumnHeader();
             role = new ColumnHeader();
@@ -41,19 +41,19 @@
             // 
             // userView
             // 
-            userView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            userView.Columns.AddRange(new ColumnHeader[] { id, name, role });
-            userView.FullRowSelect = true;
-            userView.Location = new Point(10, 10);
-            userView.Margin = new Padding(10);
-            userView.MultiSelect = false;
-            userView.Name = "userView";
-            userView.Size = new Size(780, 385);
-            userView.TabIndex = 0;
-            userView.UseCompatibleStateImageBehavior = false;
-            userView.View = View.Details;
-            userView.ColumnClick += userView_ColumnClick;
-            userView.SelectedIndexChanged += UserSelectionChanged;
+            UserListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            UserListView.Columns.AddRange(new ColumnHeader[] { id, name, role });
+            UserListView.FullRowSelect = true;
+            UserListView.Location = new Point(10, 10);
+            UserListView.Margin = new Padding(10);
+            UserListView.MultiSelect = false;
+            UserListView.Name = "userView";
+            UserListView.Size = new Size(780, 385);
+            UserListView.TabIndex = 0;
+            UserListView.UseCompatibleStateImageBehavior = false;
+            UserListView.View = View.Details;
+            UserListView.ColumnClick += userView_ColumnClick;
+            UserListView.SelectedIndexChanged += UserSelectionChanged;
             // 
             // id
             // 
@@ -121,7 +121,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(panel1);
-            Controls.Add(userView);
+            Controls.Add(UserListView);
             MinimumSize = new Size(600, 240);
             Name = "UserManagementForm";
             Padding = new Padding(10);
@@ -132,7 +132,7 @@
 
         #endregion
 
-        private ListView userView;
+        private ListView UserListView;
         private ColumnHeader id;
         private ColumnHeader name;
         private ColumnHeader role;
