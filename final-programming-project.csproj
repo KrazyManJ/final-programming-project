@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="queries\" />
+        <Folder Include="Queries\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="forms\user_input\EditUserForm.cs">
+      <Compile Update="Forms\UserInput\EditUserForm.cs">
         <SubType>Form</SubType>
       </Compile>
     </ItemGroup>

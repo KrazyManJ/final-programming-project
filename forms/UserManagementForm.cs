@@ -118,12 +118,7 @@ public partial class UserManagementForm : Form
         UpdateUserView(true);
     }
 
-    private void ComboBoxRole_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        UpdateUserView();
-    }
-
-    private void SearchInput_TextChanged(object sender, EventArgs e)
+    private void FilterInputChanged(object sender, EventArgs e)
     {
         UpdateUserView();
     }

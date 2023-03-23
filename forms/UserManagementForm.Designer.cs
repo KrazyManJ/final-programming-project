@@ -126,7 +126,7 @@
             SearchInput.Name = "SearchInput";
             SearchInput.Size = new Size(125, 27);
             SearchInput.TabIndex = 5;
-            SearchInput.TextChanged += SearchInput_TextChanged;
+            SearchInput.TextChanged += FilterInputChanged;
             // 
             // label1
             // 
@@ -139,12 +139,13 @@
             // 
             // ComboBoxRole
             // 
+            ComboBoxRole.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxRole.FormattingEnabled = true;
             ComboBoxRole.Location = new Point(383, 13);
             ComboBoxRole.Name = "ComboBoxRole";
             ComboBoxRole.Size = new Size(151, 28);
             ComboBoxRole.TabIndex = 7;
-            ComboBoxRole.SelectedIndexChanged += ComboBoxRole_SelectedIndexChanged;
+            ComboBoxRole.SelectedIndexChanged += FilterInputChanged;
             // 
             // UpdateDataButton
             // 
