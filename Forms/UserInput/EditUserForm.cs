@@ -9,7 +9,7 @@ public partial class EditUserForm : Form
     {
         User = user;
         InitializeComponent();
-        var roles = SQLManager.RegisteredRoles();
+        var roles = SQLManager.GetAll<Role>("roles");
         for (var i = 0; i < roles.Count; i++) ComboBoxRole.Items.Add(roles[i].Name);
         InputUsername.Text = user.Name;
         ComboBoxRole.SelectedIndex = ComboBoxRole.FindStringExact(user.Role.Name);

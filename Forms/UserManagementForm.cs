@@ -18,10 +18,10 @@ public partial class UserManagementForm : Form
     {
         if (loadData)
         {
-            users = SQLManager.RegisteredUsers();
+            users = SQLManager.GetAll<User>("users");
             ComboBoxRole.Items.Clear();
             ComboBoxRole.Items.Add("Všechny");
-            foreach (var role in SQLManager.RegisteredRoles()) ComboBoxRole.Items.Add(role.Name);
+            foreach (var role in SQLManager.GetAll<Role>("roles")) ComboBoxRole.Items.Add(role.Name);
             ComboBoxRole.SelectedIndex = 0;
         }
 
@@ -39,15 +39,10 @@ public partial class UserManagementForm : Form
         RemoveBtn.Enabled = UserListView.SelectedIndices.Count == 1;
     }
 
-    private void regUserBtn_Click(object sender, EventArgs e)
+    private void RegisterButtonClick(object sender, EventArgs e)
     {
         new RegisterUserForm().ShowDialog();
         UpdateUserView(true);
-    }
-
-    private void UserSelectionChanged(object? sender, EventArgs? e)
-    {
-        UpdateButtons();
     }
 
     private void RemoveBtn_Click(object sender, EventArgs e)
@@ -70,19 +65,11 @@ public partial class UserManagementForm : Form
     private void EditBtn_Click(object sender, EventArgs e)
     {
         if (UserListView.SelectedIndices.Count == 0) return;
-        var item = UserListView.SelectedItems[0];
-        var role = SQLManager.GetRoleByName(item.SubItems[2].Text);
-        new EditUserForm(new User(int.Parse(item.Text), item.SubItems[1].Text, role)).ShowDialog();
+        new EditUserForm(users[UserListView.SelectedIndices[0]]).ShowDialog();
         UpdateUserView(true);
     }
 
-    private void UpdateDataButton_Click(object sender, EventArgs e)
-    {
-        UpdateUserView(true);
-    }
-
-    private void FilterInputChanged(object sender, EventArgs e)
-    {
-        UpdateUserView();
-    }
+    private void UserSelectionChanged(object? sender, EventArgs? e) => UpdateButtons();
+    private void UpdateDataButton_Click(object sender, EventArgs e) => UpdateUserView(true);
+    private void FilterInputChanged(object sender, EventArgs e) => UpdateUserView();
 }

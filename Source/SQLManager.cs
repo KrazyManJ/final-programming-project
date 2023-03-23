@@ -1,4 +1,6 @@
 ﻿using System.Data.SqlClient;
+using System.Reflection.Metadata;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using final_programming_project.Objects;
@@ -95,15 +97,13 @@ public static class SQLManager
         role ??= DEFAULT_ROLE_NAME;
         if (IsUserRegistered(username)) return RegisterResponse.ALREADY_EXISTS;
         var hash = new PasswordHash(password);
-        var connection = InitConnection();
-        var cmd = Command(connection,
-            "INSERT INTO users (name,passwordhash,passwordsalt,role) VALUES (@name,@hash,@salt,@roleid)");
-        cmd.Parameters.AddWithValue("name", username);
-        cmd.Parameters.AddWithValue("hash", hash.Hash);
-        cmd.Parameters.AddWithValue("salt", hash.Salt);
-        cmd.Parameters.AddWithValue("roleid", GetIdByRoleName(role));
-        cmd.ExecuteNonQuery();
-        connection.Close();
+        new SQLBuilder()
+            .Command("INSERT INTO users (name,passwordhash,passwordsalt,role) VALUES (@name,@hash,@salt,@roleid)")
+            .Parameter("name", username)
+            .Parameter("hash", hash.Hash)
+            .Parameter("salt", hash.Salt)
+            .Parameter("roleid", GetIdByRoleName(role)).Execute()
+            .Close();
         return RegisterResponse.SUCCESS;
     }
 
@@ -126,35 +126,22 @@ public static class SQLManager
         }
     }
 
-    public static List<User> RegisteredUsers()
+    public static List<T> GetAll<T>(string tableName)
     {
-        var connection = InitConnection();
-        var cmd = Command(connection, "SELECT * FROM users");
-        var reader = cmd.ExecuteReader();
-        List<User> users = new();
-        while (reader.Read()) users.Add(new User(reader));
-        reader.Close();
-        connection.Close();
-        return users;
-    }
-
-    public static List<Role> RegisteredRoles()
-    {
-        var connection = InitConnection();
-        var cmd = Command(connection, "SELECT * FROM roles");
-        var reader = cmd.ExecuteReader();
-        List<Role> roles = new();
-        while (reader.Read()) roles.Add(new Role(reader));
-        return roles;
+        List<T> list = new List<T>();
+        new SQLBuilder().Command("SELECT * FROM "+SQLBuilder.Quote(tableName))
+            .ExecuteReadAll(r =>
+            {
+                ConstructorInfo? constructor = typeof(T).GetConstructor(new Type[] { typeof(SqlDataReader) });
+                if (constructor != null) list.Add((T)constructor.Invoke(new object[] { r }));
+            })
+            .Close();
+        return list;
     }
 
     public static void RemoveUserByID(int id)
     {
-        var connection = InitConnection();
-        var cmd = Command(connection, "DELETE from users WHERE id=@id");
-        cmd.Parameters.AddWithValue("id", id);
-        cmd.ExecuteNonQuery();
-        connection.Close();
+        new SQLBuilder().Command("DELETE FROM users WHERE id=@id").Parameter("id", id).Execute().Close();
     }
 }
 

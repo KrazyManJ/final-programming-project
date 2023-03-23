@@ -5,6 +5,10 @@ namespace final_programming_project.Objects;
 
 public class User : IListViewable
 {
+    public int ID { get; } = -1;
+    public string Name { get; }
+    public Role Role { get; }
+
     public User(string name, Role role)
     {
         Name = name;
@@ -24,10 +28,6 @@ public class User : IListViewable
         Name = reader.GetString(1);
         Role = SQLManager.GetRoleByID(reader.GetInt32(4));
     }
-
-    public int ID { get; } = -1;
-    public string Name { get; }
-    public Role Role { get; }
 
     public ListViewItem ToListViewItem()
     {

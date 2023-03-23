@@ -1,4 +1,5 @@
-﻿using final_programming_project.Source;
+﻿using final_programming_project.Objects;
+using final_programming_project.Source;
 
 namespace final_programming_project.Forms.UserInput;
 
@@ -7,7 +8,7 @@ public partial class RegisterUserForm : Form
     public RegisterUserForm()
     {
         InitializeComponent();
-        foreach (var role in SQLManager.RegisteredRoles()) ComboBoxRole.Items.Add(role.Name);
+        foreach (var role in SQLManager.GetAll<Role>("roles")) ComboBoxRole.Items.Add(role.Name);
         ComboBoxRole.Text = "Zvol roli...";
         UpdateActionButtonState();
     }

@@ -84,7 +84,7 @@ namespace final_programming_project.Forms
             regUserBtn.TabIndex = 1;
             regUserBtn.Text = "Registrovat Nového Uživatele";
             regUserBtn.UseVisualStyleBackColor = true;
-            regUserBtn.Click += regUserBtn_Click;
+            regUserBtn.Click += RegisterButtonClick;
             // 
             // EditBtn
             // 
