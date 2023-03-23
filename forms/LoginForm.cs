@@ -1,7 +1,7 @@
-﻿using final_programming_project.obj_str;
-using final_programming_project.src;
+﻿using final_programming_project.Objects;
+using final_programming_project.Source;
 
-namespace final_programming_project;
+namespace final_programming_project.Forms;
 
 public partial class LoginForm : Form
 {
@@ -17,13 +17,12 @@ public partial class LoginForm : Form
     {
         var inputs = new[] { InputName, InputPassword };
         foreach (var box in inputs)
-        {
             if (box.Text == "")
             {
                 LoginButton.Enabled = false;
                 return;
             }
-        }
+
         LoginButton.Enabled = true;
     }
 

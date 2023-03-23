@@ -1,4 +1,4 @@
-﻿namespace final_programming_project
+﻿namespace final_programming_project.Forms.UserInput
 {
     partial class EditUserForm
     {

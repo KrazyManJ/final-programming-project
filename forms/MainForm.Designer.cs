@@ -1,4 +1,4 @@
-﻿namespace final_programming_project
+﻿namespace final_programming_project.Forms
 {
     partial class MainForm
     {

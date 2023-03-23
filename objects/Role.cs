@@ -1,20 +1,15 @@
-﻿using final_programming_project.objects;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-namespace final_programming_project.obj_str;
+namespace final_programming_project.Objects;
 
 public class Role
 {
-    public int ID { get; } = 1;
-    public string Name { get; }
-    public bool Full_Perm { get; }
-
     public Role(string name, bool full_perm)
     {
         Name = name;
         Full_Perm = full_perm;
     }
-    
+
     public Role(SqlDataReader reader)
     {
         ID = reader.GetInt32(0);
@@ -22,4 +17,7 @@ public class Role
         Full_Perm = reader.GetBoolean(2);
     }
 
+    public int ID { get; } = 1;
+    public string Name { get; }
+    public bool Full_Perm { get; }
 }

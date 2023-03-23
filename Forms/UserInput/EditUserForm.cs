@@ -1,88 +1,81 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using final_programming_project.obj_str;
-using final_programming_project.src;
+﻿using final_programming_project.Objects;
+using final_programming_project.Source;
 
-namespace final_programming_project
+namespace final_programming_project.Forms.UserInput;
+
+public partial class EditUserForm : Form
 {
-    public partial class EditUserForm : Form
+    public EditUserForm(User user)
     {
-        public User User { get; set; }
-        public EditUserForm(User user)
+        User = user;
+        InitializeComponent();
+        var roles = SQLManager.RegisteredRoles();
+        for (var i = 0; i < roles.Count; i++) ComboBoxRole.Items.Add(roles[i].Name);
+        InputUsername.Text = user.Name;
+        ComboBoxRole.SelectedIndex = ComboBoxRole.FindStringExact(user.Role.Name);
+        UpdateActionButtonState();
+    }
+
+    public User User { get; set; }
+
+    private void UpdateActionButtonState()
+    {
+        if (ComboBoxRole.SelectedItem == null)
         {
-            User = user;
-            InitializeComponent();
-            List<Role> roles = SQLManager.RegisteredRoles();
-            for (int i = 0; i < roles.Count; i++)
-            {
-                ComboBoxRole.Items.Add(roles[i].Name);
-            }
-            InputUsername.Text = user.Name;
-            ComboBoxRole.SelectedIndex = ComboBoxRole.FindStringExact(user.Role.Name);
-            UpdateActionButtonState();
+            ActionButton.Enabled = false;
+            return;
         }
 
-        private void UpdateActionButtonState()
+        if (InputUsername.Text == "")
         {
-            if (ComboBoxRole.SelectedItem == null)
+            ActionButton.Enabled = false;
+            return;
+        }
+
+        if (ChangePassCheck.Checked)
+        {
+            if (InputPassword.Text == "" || InputConfirmPassword.Text == "")
             {
                 ActionButton.Enabled = false;
                 return;
             }
-            if (InputUsername.Text == "")
+
+            if (InputPassword.Text != InputConfirmPassword.Text)
             {
                 ActionButton.Enabled = false;
                 return;
             }
-            if (ChangePassCheck.Checked)
-            {
-                if (InputPassword.Text == "" || InputConfirmPassword.Text == "")
-                {
-                    ActionButton.Enabled = false;
-                    return;
-                }
-                if (InputPassword.Text != InputConfirmPassword.Text)
-                {
-                    ActionButton.Enabled = false;
-                    return;
-                }
-            }
-            ActionButton.Enabled = true;
         }
 
-        private void UnputChanged(object? sender, EventArgs? e)
-        {
-            UpdateActionButtonState();
-        }
+        ActionButton.Enabled = true;
+    }
 
-        private void EditUser()
-        {
-            SQLManager.EditUser(User.ID, InputUsername.Text, ComboBoxRole.Text, ChangePassCheck.Checked ? InputPassword.Text : null);
-            Close();
-        }
+    private void UnputChanged(object? sender, EventArgs? e)
+    {
+        UpdateActionButtonState();
+    }
 
-        private void ActionButtonClick(object sender, EventArgs e)
-        {
-            if (ActionButton.Enabled) EditUser();
-        }
+    private void EditUser()
+    {
+        SQLManager.EditUser(User.ID, InputUsername.Text, ComboBoxRole.Text,
+            ChangePassCheck.Checked ? InputPassword.Text : null);
+        Close();
+    }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && ActionButton.Enabled) EditUser();
-        }
+    private void ActionButtonClick(object sender, EventArgs e)
+    {
+        if (ActionButton.Enabled) EditUser();
+    }
 
-        private void ChangePassCheckChanged(object sender, EventArgs e)
-        {
-            InputConfirmPassword.Enabled = ChangePassCheck.Checked;
-            InputPassword.Enabled = ChangePassCheck.Checked;
-            UpdateActionButtonState();
-        }
+    private void OnKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter && ActionButton.Enabled) EditUser();
+    }
+
+    private void ChangePassCheckChanged(object sender, EventArgs e)
+    {
+        InputConfirmPassword.Enabled = ChangePassCheck.Checked;
+        InputPassword.Enabled = ChangePassCheck.Checked;
+        UpdateActionButtonState();
     }
 }

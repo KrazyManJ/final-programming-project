@@ -1,11 +1,12 @@
-﻿using final_programming_project.obj_str;
-using final_programming_project.src;
+﻿using final_programming_project.Forms.UserInput;
+using final_programming_project.Objects;
+using final_programming_project.Source;
 
-namespace final_programming_project;
+namespace final_programming_project.Forms;
 
 public partial class UserManagementForm : Form
 {
-    private List<User> users = new List<User>();
+    private List<User> users = new();
 
     public UserManagementForm()
     {
@@ -23,12 +24,12 @@ public partial class UserManagementForm : Form
             foreach (var role in SQLManager.RegisteredRoles()) ComboBoxRole.Items.Add(role.Name);
             ComboBoxRole.SelectedIndex = 0;
         }
+
         UserListView.Items.Clear();
-        foreach (User user in users)
-        {
-            if ((user.Role.Name == ComboBoxRole.Text || ComboBoxRole.SelectedIndex == 0) && user.Name.Contains(SearchInput.Text))
+        foreach (var user in users)
+            if ((user.Role.Name == ComboBoxRole.Text || ComboBoxRole.SelectedIndex == 0) &&
+                user.Name.Contains(SearchInput.Text))
                 UserListView.Items.Add(user.ToListViewItem());
-        }
         UpdateButtons();
     }
 
@@ -52,8 +53,8 @@ public partial class UserManagementForm : Form
     private void RemoveBtn_Click(object sender, EventArgs e)
     {
         if (UserListView.SelectedIndices.Count == 0) return;
-        ListViewItem item = UserListView.SelectedItems[0];
-        DialogResult response = MessageBox.Show(
+        var item = UserListView.SelectedItems[0];
+        var response = MessageBox.Show(
             "Opravdu chcete vymazat uživatele s ID '" + item.Text + "'?",
             "Vymazání uživatele",
             MessageBoxButtons.YesNo,
@@ -69,8 +70,8 @@ public partial class UserManagementForm : Form
     private void EditBtn_Click(object sender, EventArgs e)
     {
         if (UserListView.SelectedIndices.Count == 0) return;
-        ListViewItem item = UserListView.SelectedItems[0];
-        Role role = SQLManager.GetRoleByName(item.SubItems[2].Text);
+        var item = UserListView.SelectedItems[0];
+        var role = SQLManager.GetRoleByName(item.SubItems[2].Text);
         new EditUserForm(new User(int.Parse(item.Text), item.SubItems[1].Text, role)).ShowDialog();
         UpdateUserView(true);
     }

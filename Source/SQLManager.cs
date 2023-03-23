@@ -1,13 +1,12 @@
 ﻿using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
-using final_programming_project.obj_str;
+using final_programming_project.Objects;
 
-namespace final_programming_project.src;
+namespace final_programming_project.Source;
 
 public static class SQLManager
 {
-
     private static readonly int DEFAULT_ROLE_ID = 1;
     private static readonly string DEFAULT_ROLE_NAME = "user";
 
@@ -23,18 +22,18 @@ public static class SQLManager
 
     public static SqlCommand Command(SqlConnection connection, string commandText)
     {
-        SqlCommand command = connection.CreateCommand();
+        var command = connection.CreateCommand();
         command.CommandText = commandText;
         return command;
     }
-    
+
     public static bool IsUserRegistered(string username)
     {
-        SqlConnection connection = InitConnection();
-        SqlCommand command = Command(connection, "SELECT id FROM users WHERE name=@name");
+        var connection = InitConnection();
+        var command = Command(connection, "SELECT id FROM users WHERE name=@name");
         command.Parameters.AddWithValue("name", username);
-        SqlDataReader reader = command.ExecuteReader();
-        bool val = reader.Read();
+        var reader = command.ExecuteReader();
+        var val = reader.Read();
         reader.Close();
         connection.Close();
         return val;
@@ -42,14 +41,14 @@ public static class SQLManager
 
     public static LoginResponse CheckLoginData(string username, string password)
     {
-        SqlConnection connection = InitConnection();
-        SqlCommand cmd = Command(connection, "SELECT * FROM users WHERE name=@name");
+        var connection = InitConnection();
+        var cmd = Command(connection, "SELECT * FROM users WHERE name=@name");
         cmd.Parameters.AddWithValue("name", username);
         var reader = cmd.ExecuteReader();
         LoginResponse response = new(null, LoginStatus.USERNAME_NOT_EXIST);
         if (reader.Read())
         {
-            PasswordHash pass = new PasswordHash(password, (byte[])reader[3]);
+            var pass = new PasswordHash(password, (byte[])reader[3]);
             response = pass.Hash.SequenceEqual((byte[])reader[2])
                 ? new LoginResponse(new User(reader), LoginStatus.SUCCESS)
                 : new LoginResponse(null, LoginStatus.PASSWORD_INCORRECT);
@@ -62,7 +61,7 @@ public static class SQLManager
 
     public static Role GetRoleByID(int id)
     {
-        SqlConnection connection = InitConnection();
+        var connection = InitConnection();
         var cmd = Command(connection, "SELECT * FROM roles WHERE id=@id");
         cmd.Parameters.AddWithValue("id", id);
         Role role = new("User", false);
@@ -72,18 +71,20 @@ public static class SQLManager
         connection.Close();
         return role;
     }
+
     public static int GetIdByRoleName(string roleName)
     {
-        SqlConnection connection = InitConnection();
+        var connection = InitConnection();
         var cmd = Command(connection, "SELECT id FROM roles WHERE name=@name");
         cmd.Parameters.AddWithValue("name", roleName);
         var reader = cmd.ExecuteReader();
-        int val = DEFAULT_ROLE_ID;
+        var val = DEFAULT_ROLE_ID;
         if (reader.Read()) val = reader.GetInt32(0);
         reader.Close();
         connection.Close();
         return val;
     }
+
     public static Role GetRoleByName(string roleName)
     {
         return GetRoleByID(GetIdByRoleName(roleName));
@@ -93,9 +94,10 @@ public static class SQLManager
     {
         role ??= DEFAULT_ROLE_NAME;
         if (IsUserRegistered(username)) return RegisterResponse.ALREADY_EXISTS;
-        PasswordHash hash = new PasswordHash(password);
-        SqlConnection connection = InitConnection();
-        var cmd = Command(connection, "INSERT INTO users (name,passwordhash,passwordsalt,role) VALUES (@name,@hash,@salt,@roleid)");
+        var hash = new PasswordHash(password);
+        var connection = InitConnection();
+        var cmd = Command(connection,
+            "INSERT INTO users (name,passwordhash,passwordsalt,role) VALUES (@name,@hash,@salt,@roleid)");
         cmd.Parameters.AddWithValue("name", username);
         cmd.Parameters.AddWithValue("hash", hash.Hash);
         cmd.Parameters.AddWithValue("salt", hash.Salt);
@@ -107,7 +109,7 @@ public static class SQLManager
 
     public static void EditUser(int id, string name, string role, string? password = null)
     {
-        SqlConnection connection = InitConnection();
+        var connection = InitConnection();
         var cmd = Command(connection, "UPDATE users SET name=@name,role=@role WHERE id=@id");
         cmd.Parameters.AddWithValue("name", name);
         cmd.Parameters.AddWithValue("role", GetIdByRoleName(role));
@@ -115,7 +117,7 @@ public static class SQLManager
         cmd.ExecuteNonQuery();
         if (password != null)
         {
-            PasswordHash hash = new PasswordHash(password);
+            var hash = new PasswordHash(password);
             cmd = Command(connection, "UPDATE users SET passwordhash=@hash,passwordsalt=@salt WHERE id=@id");
             cmd.Parameters.AddWithValue("hash", hash.Hash);
             cmd.Parameters.AddWithValue("salt", hash.Salt);
@@ -126,9 +128,9 @@ public static class SQLManager
 
     public static List<User> RegisteredUsers()
     {
-        SqlConnection connection = InitConnection();
+        var connection = InitConnection();
         var cmd = Command(connection, "SELECT * FROM users");
-        SqlDataReader reader = cmd.ExecuteReader();
+        var reader = cmd.ExecuteReader();
         List<User> users = new();
         while (reader.Read()) users.Add(new User(reader));
         reader.Close();
@@ -138,9 +140,9 @@ public static class SQLManager
 
     public static List<Role> RegisteredRoles()
     {
-        SqlConnection connection = InitConnection();
-        SqlCommand cmd = Command(connection, "SELECT * FROM roles");
-        SqlDataReader reader = cmd.ExecuteReader();
+        var connection = InitConnection();
+        var cmd = Command(connection, "SELECT * FROM roles");
+        var reader = cmd.ExecuteReader();
         List<Role> roles = new();
         while (reader.Read()) roles.Add(new Role(reader));
         return roles;
@@ -148,13 +150,12 @@ public static class SQLManager
 
     public static void RemoveUserByID(int id)
     {
-        SqlConnection connection = InitConnection();
-        SqlCommand cmd = Command(connection, "DELETE from users WHERE id=@id");
+        var connection = InitConnection();
+        var cmd = Command(connection, "DELETE from users WHERE id=@id");
         cmd.Parameters.AddWithValue("id", id);
         cmd.ExecuteNonQuery();
         connection.Close();
     }
-
 }
 
 public enum RegisterResponse
@@ -165,9 +166,6 @@ public enum RegisterResponse
 
 internal class PasswordHash
 {
-    public byte[] Hash { get; set; }
-    public byte[] Salt { get; set; }
-
     public PasswordHash(string password, byte[]? salt = null)
     {
         HMACSHA512 hmac = new();
@@ -175,4 +173,7 @@ internal class PasswordHash
         Hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         Salt = hmac.Key;
     }
+
+    public byte[] Hash { get; set; }
+    public byte[] Salt { get; set; }
 }

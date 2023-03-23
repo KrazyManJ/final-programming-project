@@ -1,17 +1,12 @@
-﻿using final_programming_project.objects;
-using final_programming_project.src;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using final_programming_project.Source;
 
-namespace final_programming_project.obj_str;
+namespace final_programming_project.Objects;
 
 public class User : IListViewable
 {
-    public int ID { get; } = -1;
-    public string Name { get; }
-    public Role Role { get; }
-
     public User(string name, Role role)
-    { 
+    {
         Name = name;
         Role = role;
     }
@@ -30,8 +25,12 @@ public class User : IListViewable
         Role = SQLManager.GetRoleByID(reader.GetInt32(4));
     }
 
+    public int ID { get; } = -1;
+    public string Name { get; }
+    public Role Role { get; }
+
     public ListViewItem ToListViewItem()
     {
-        return new ListViewItem(new string[] { ID.ToString(), Name, Role.Name });
+        return new ListViewItem(new[] { ID.ToString(), Name, Role.Name });
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace final_programming_project.obj_str;
+﻿namespace final_programming_project.Objects;
 
 public class LoginResponse
 {

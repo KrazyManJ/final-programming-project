@@ -1,6 +1,6 @@
 ﻿using final_programming_project.Toolbox;
 
-namespace final_programming_project
+namespace final_programming_project.Forms
 {
     partial class UserManagementForm
     {

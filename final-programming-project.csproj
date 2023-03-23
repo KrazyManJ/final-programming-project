@@ -10,17 +10,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Queries\" />
+        <Folder Include="Queries\"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.8.5"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Forms\UserInput\EditUserForm.cs">
-        <SubType>Form</SubType>
-      </Compile>
+        <Compile Update="Forms\UserInput\EditUserForm.cs">
+            <SubType>Form</SubType>
+        </Compile>
     </ItemGroup>
 
 </Project>

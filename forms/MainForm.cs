@@ -1,6 +1,6 @@
-using final_programming_project.obj_str;
+using final_programming_project.Objects;
 
-namespace final_programming_project;
+namespace final_programming_project.Forms;
 
 public partial class MainForm : Form
 {
