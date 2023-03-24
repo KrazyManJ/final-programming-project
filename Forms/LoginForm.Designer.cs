@@ -35,19 +35,19 @@
             label2 = new Label();
             SuspendLayout();
             // 
-            // Input_Name
+            // InputName
             // 
             InputName.Location = new Point(26, 34);
-            InputName.Name = "Input_Name";
+            InputName.Name = "InputName";
             InputName.Size = new Size(248, 27);
             InputName.TabIndex = 0;
             InputName.TextChanged += UpdateLoginBtnState;
             InputName.KeyDown += OnKeyDown;
             // 
-            // Input_Password
+            // InputPassword
             // 
             InputPassword.Location = new Point(26, 85);
-            InputPassword.Name = "Input_Password";
+            InputPassword.Name = "InputPassword";
             InputPassword.PasswordChar = '●';
             InputPassword.Size = new Size(248, 27);
             InputPassword.TabIndex = 1;

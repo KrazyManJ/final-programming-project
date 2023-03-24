@@ -8,7 +8,7 @@ namespace final_programming_project.Source;
 
 public static class SQLManager
 {
-
+    
     // UTILS
 
     public static string Quote(string sql) => new SqlCommandBuilder().QuoteIdentifier(sql);
@@ -93,7 +93,7 @@ public static class SQLManager
     public static void EditUser(int id, string name, string role, string? password = null)
     {
         new SQLExecuter("UPDATE users SET name=@name,role=@role WHERE id=@id")
-            .Parameter("name",name).Parameter("role",role).Parameter("id",id)
+            .Parameter("name",name).Parameter("role", (SelectByName<Role>(TableName.roles, role) ?? Role.DEFAULT).ID).Parameter("id",id)
             .Execute();
         if (password != null)
         {
@@ -111,7 +111,8 @@ public static class SQLManager
 public enum TableName
 {
     users,
-    roles
+    roles,
+    contracts
 }
 
 public enum RegisterResponse

@@ -57,7 +57,7 @@ public partial class UserManagementForm : Form
         );
         if (response == DialogResult.Yes)
         {
-            SQLManager.RemoveById(TableName.users,int.Parse(item.Text));
+            SQLManager.RemoveById(TableName.users, int.Parse(item.Text));
             UpdateUserView(true);
         }
     }
@@ -76,6 +76,6 @@ public partial class UserManagementForm : Form
     }
 
     private void UserSelectionChanged(object? sender, EventArgs? e) => UpdateButtons();
-    
+
     private void FilterInputChanged(object sender, EventArgs e) => UpdateUserView();
 }

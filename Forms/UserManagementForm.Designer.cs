@@ -39,7 +39,6 @@ namespace final_programming_project.Forms
             RemoveBtn = new Button();
             panel1 = new Panel();
             SearchInput = new TextBox();
-            label1 = new Label();
             ComboBoxRole = new ComboBox();
             UpdateDataButton = new Button();
             RoleFilterLabel = new Label();
@@ -123,20 +122,12 @@ namespace final_programming_project.Forms
             // 
             // SearchInput
             // 
-            SearchInput.Location = new Point(144, 13);
+            SearchInput.Location = new Point(10, 13);
             SearchInput.Name = "SearchInput";
-            SearchInput.Size = new Size(125, 27);
+            SearchInput.PlaceholderText = "Vyhledat uživatele...";
+            SearchInput.Size = new Size(256, 27);
             SearchInput.TabIndex = 5;
             SearchInput.TextChanged += FilterInputChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(10, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(133, 20);
-            label1.TabIndex = 6;
-            label1.Text = "Vyhledat uživatele:";
             // 
             // ComboBoxRole
             // 
@@ -176,7 +167,6 @@ namespace final_programming_project.Forms
             Controls.Add(RoleFilterLabel);
             Controls.Add(UpdateDataButton);
             Controls.Add(ComboBoxRole);
-            Controls.Add(label1);
             Controls.Add(SearchInput);
             Controls.Add(panel1);
             Controls.Add(UserListView);
@@ -190,8 +180,6 @@ namespace final_programming_project.Forms
         }
 
         #endregion
-
-        private ListView UserListView;
         private ColumnHeader id;
         private ColumnHeader name;
         private ColumnHeader role;
@@ -200,9 +188,9 @@ namespace final_programming_project.Forms
         private Button RemoveBtn;
         private Panel panel1;
         private TextBox SearchInput;
-        private Label label1;
         private ComboBox ComboBoxRole;
         private Button UpdateDataButton;
         private Label RoleFilterLabel;
+        private SortableListView UserListView;
     }
 }
