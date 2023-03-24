@@ -4,6 +4,12 @@ namespace final_programming_project.Objects;
 
 public class Role
 {
+    public static readonly Role DEFAULT = new Role("user", true);
+
+    public int ID { get; } = 1;
+    public string Name { get; }
+    public bool Full_Perm { get; }
+
     public Role(string name, bool full_perm)
     {
         Name = name;
@@ -16,8 +22,4 @@ public class Role
         Name = reader.GetString(1);
         Full_Perm = reader.GetBoolean(2);
     }
-
-    public int ID { get; } = 1;
-    public string Name { get; }
-    public bool Full_Perm { get; }
 }

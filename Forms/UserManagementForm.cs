@@ -18,10 +18,10 @@ public partial class UserManagementForm : Form
     {
         if (loadData)
         {
-            users = SQLManager.GetAll<User>("users");
+            users = SQLManager.SelectAll<User>(TableName.users);
             ComboBoxRole.Items.Clear();
             ComboBoxRole.Items.Add("Všechny");
-            foreach (var role in SQLManager.GetAll<Role>("roles")) ComboBoxRole.Items.Add(role.Name);
+            foreach (var role in SQLManager.SelectAll<Role>(TableName.roles)) ComboBoxRole.Items.Add(role.Name);
             ComboBoxRole.SelectedIndex = 0;
         }
 
@@ -57,7 +57,7 @@ public partial class UserManagementForm : Form
         );
         if (response == DialogResult.Yes)
         {
-            SQLManager.RemoveUserByID(int.Parse(item.Text));
+            SQLManager.RemoveById(TableName.users,int.Parse(item.Text));
             UpdateUserView(true);
         }
     }
@@ -69,7 +69,13 @@ public partial class UserManagementForm : Form
         UpdateUserView(true);
     }
 
+    private void UpdateDataButton_Click(object sender, EventArgs e)
+    {
+        SearchInput.Text = "";
+        UpdateUserView(true);
+    }
+
     private void UserSelectionChanged(object? sender, EventArgs? e) => UpdateButtons();
-    private void UpdateDataButton_Click(object sender, EventArgs e) => UpdateUserView(true);
+    
     private void FilterInputChanged(object sender, EventArgs e) => UpdateUserView();
 }

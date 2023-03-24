@@ -26,7 +26,7 @@ public class User : IListViewable
     {
         ID = reader.GetInt32(0);
         Name = reader.GetString(1);
-        Role = SQLManager.GetRoleByID(reader.GetInt32(4));
+        Role = SQLManager.SelectById<Role>(TableName.roles,reader.GetInt32(4)) ?? Role.DEFAULT;
     }
 
     public ListViewItem ToListViewItem()

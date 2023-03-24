@@ -5,11 +5,6 @@ namespace final_programming_project.Source
     public class SQLExecuter
     {
 
-        public static string Quote(string sql)
-        {
-            return new SqlCommandBuilder().QuoteIdentifier(sql);
-        }
-
         private static readonly string CONNECTION_STRING =
             @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=final-programming-project-db;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         
@@ -28,6 +23,12 @@ namespace final_programming_project.Source
             return this;
         }
 
+        public SQLExecuter Parameters(Dictionary<string, object> parameters)
+        {
+            foreach (var parameter in parameters) command.Parameters.AddWithValue(parameter.Key, parameter.Value);
+            return this;
+        }
+
         public void Execute()
         {
             command.ExecuteNonQuery();
@@ -36,7 +37,7 @@ namespace final_programming_project.Source
 
         public List<T> ExecuteReadAll<T>(Func<SqlDataReader,T> func) {
             SqlDataReader reader = command.ExecuteReader();
-            List<T> result = new List<T>();
+            List<T> result = new();
             while (reader.Read()) result.Add(func(reader));
             reader.Close();
             Close();

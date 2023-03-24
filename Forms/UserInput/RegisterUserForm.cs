@@ -8,7 +8,7 @@ public partial class RegisterUserForm : Form
     public RegisterUserForm()
     {
         InitializeComponent();
-        foreach (var role in SQLManager.GetAll<Role>("roles")) ComboBoxRole.Items.Add(role.Name);
+        foreach (var role in SQLManager.SelectAll<Role>(TableName.roles)) ComboBoxRole.Items.Add(role.Name);
         ComboBoxRole.Text = "Zvol roli...";
         UpdateActionButtonState();
     }
