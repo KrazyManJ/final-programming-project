@@ -40,6 +40,7 @@ namespace final_programming_project.Forms
             SearchInput = new TextBox();
             UpdateDataButton = new Button();
             AddContractButton = new Button();
+            EmployeeMngButton = new Button();
             SuspendLayout();
             // 
             // UsernameLabel
@@ -129,11 +130,22 @@ namespace final_programming_project.Forms
             AddContractButton.UseVisualStyleBackColor = true;
             AddContractButton.Click += AddContractButton_Click;
             // 
+            // EmployeeMngButton
+            // 
+            EmployeeMngButton.Location = new Point(484, 10);
+            EmployeeMngButton.Name = "EmployeeMngButton";
+            EmployeeMngButton.Size = new Size(161, 29);
+            EmployeeMngButton.TabIndex = 7;
+            EmployeeMngButton.Text = "Správa zaměstnanců";
+            EmployeeMngButton.UseVisualStyleBackColor = true;
+            EmployeeMngButton.Click += EmployeeMngButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 530);
+            Controls.Add(EmployeeMngButton);
             Controls.Add(AddContractButton);
             Controls.Add(UpdateDataButton);
             Controls.Add(SearchInput);
@@ -159,5 +171,6 @@ namespace final_programming_project.Forms
         private TextBox SearchInput;
         private Button UpdateDataButton;
         private Button AddContractButton;
+        private Button EmployeeMngButton;
     }
 }

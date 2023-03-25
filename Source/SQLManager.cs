@@ -112,7 +112,8 @@ public enum TableName
 {
     users,
     roles,
-    contracts
+    contracts,
+    employees
 }
 
 public enum RegisterResponse

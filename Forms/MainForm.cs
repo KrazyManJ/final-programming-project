@@ -45,10 +45,7 @@ public partial class MainForm : Form
         Close();
     }
 
-    private void ManageUsersButton_Click(object sender, EventArgs e)
-    {
-        new UserManagementForm().ShowDialog();
-    }
+    private void ManageUsersButton_Click(object sender, EventArgs e) => new UserManagementForm().ShowDialog();
 
     private void ContractsListView_DoubleClick(object sender, EventArgs e)
     {
@@ -58,10 +55,8 @@ public partial class MainForm : Form
         // FURTHER IMPLEMENTATION NEEDED
     }
 
-    private void SearchInput_TextChanged(object sender, EventArgs e)
-    {
-        UpdateListView();
-    }
+    private void SearchInput_TextChanged(object sender, EventArgs e) => UpdateListView();
+    
 
     private void UpdateDataButton_Click(object sender, EventArgs e)
     {
@@ -74,4 +69,7 @@ public partial class MainForm : Form
         new AddContractForm().ShowDialog();
         UpdateListView(true);
     }
+
+    private void EmployeeMngButton_Click(object sender, EventArgs e) => new EmployeeManagementForm().ShowDialog();
+    
 }
