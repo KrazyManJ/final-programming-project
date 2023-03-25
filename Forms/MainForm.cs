@@ -1,6 +1,5 @@
 using final_programming_project.Objects;
 using final_programming_project.Source;
-using System.Linq;
 
 namespace final_programming_project.Forms;
 
@@ -63,6 +62,12 @@ public partial class MainForm : Form
     private void UpdateDataButton_Click(object sender, EventArgs e)
     {
         SearchInput.Text = string.Empty;
+        UpdateListView(true);
+    }
+
+    private void AddContractButton_Click(object sender, EventArgs e)
+    {
+        new AddContractForm().ShowDialog();
         UpdateListView(true);
     }
 }

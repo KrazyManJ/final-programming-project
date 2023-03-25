@@ -39,6 +39,7 @@ namespace final_programming_project.Forms
             columnHeader3 = new ColumnHeader();
             SearchInput = new TextBox();
             UpdateDataButton = new Button();
+            AddContractButton = new Button();
             SuspendLayout();
             // 
             // UsernameLabel
@@ -79,7 +80,7 @@ namespace final_programming_project.Forms
             ContractsListView.Location = new Point(12, 86);
             ContractsListView.MultiSelect = false;
             ContractsListView.Name = "ContractsListView";
-            ContractsListView.Size = new Size(776, 432);
+            ContractsListView.Size = new Size(776, 397);
             ContractsListView.TabIndex = 3;
             ContractsListView.UseCompatibleStateImageBehavior = false;
             ContractsListView.View = View.Details;
@@ -118,11 +119,22 @@ namespace final_programming_project.Forms
             UpdateDataButton.UseVisualStyleBackColor = true;
             UpdateDataButton.Click += UpdateDataButton_Click;
             // 
+            // AddContractButton
+            // 
+            AddContractButton.Location = new Point(12, 489);
+            AddContractButton.Name = "AddContractButton";
+            AddContractButton.Size = new Size(179, 29);
+            AddContractButton.TabIndex = 6;
+            AddContractButton.Text = "Přidat zakázku";
+            AddContractButton.UseVisualStyleBackColor = true;
+            AddContractButton.Click += AddContractButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 530);
+            Controls.Add(AddContractButton);
             Controls.Add(UpdateDataButton);
             Controls.Add(SearchInput);
             Controls.Add(ContractsListView);
@@ -146,5 +158,6 @@ namespace final_programming_project.Forms
         private ColumnHeader columnHeader3;
         private TextBox SearchInput;
         private Button UpdateDataButton;
+        private Button AddContractButton;
     }
 }

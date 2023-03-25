@@ -50,6 +50,7 @@ namespace final_programming_project.Forms
             UserListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             UserListView.Columns.AddRange(new ColumnHeader[] { id, name, role });
             UserListView.FullRowSelect = true;
+            UserListView.GridLines = true;
             UserListView.Location = new Point(10, 55);
             UserListView.Margin = new Padding(10);
             UserListView.MultiSelect = false;
