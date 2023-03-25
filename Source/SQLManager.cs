@@ -25,10 +25,24 @@ public static class SQLManager
             .ExecuteReadAll(r => (T)constructor.Invoke(new object[] { r }));
     }
 
-    public static void Add<T>(TableName name, T value) where T : ISQLSerializable
+    public static void Insert<T>(TableName name, T value) where T : ISQLSerializable
     {
-        new SQLExecuter(value.Query(Quote(name.ToString())))
-            .Parameters(value.ToSQLParams()).Execute();
+        Dictionary<string,object> paramsdict = value.ToSQLParams();
+        string columnnames = string.Join(',', paramsdict.Keys);
+        string paramnames = string.Join(',', paramsdict.Keys.Select(k => '@' + k));
+        new SQLExecuter($"INSERT INTO {Quote(name.ToString())} ({columnnames}) VALUES ({paramnames})")
+            .Parameters(paramsdict)
+            .Execute();
+    }
+
+    public static void Update<T>(TableName name, int id, T value) where T : ISQLSerializable
+    {
+        Dictionary<string, object> paramsdict = value.ToSQLParams();
+        string updateString = string.Join(",", paramsdict.Keys.Select(k => $"{k}=@{k}"));
+        new SQLExecuter($"UPDATE {Quote(name.ToString())} SET {updateString} WHERE id=@id")
+            .Parameters(paramsdict)
+            .Parameter("id",id)
+            .Execute();
     }
 
     public static void RemoveById(TableName name, int id)

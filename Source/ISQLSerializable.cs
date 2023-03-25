@@ -8,7 +8,6 @@ namespace final_programming_project.Source
 {
     public interface ISQLSerializable
     {
-        public string Query(string tablename);
         public Dictionary<string,object> ToSQLParams();
     }
 }

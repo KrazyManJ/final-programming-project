@@ -32,11 +32,6 @@ namespace final_programming_project.Objects
             return new ListViewItem(new string[] { ID.ToString(), Customer, Description });
         }
 
-        public string Query(string tablename)
-        {
-            return $"INSERT INTO {tablename} (customer,description) VALUES (@customer,@description)";
-        }
-
         public Dictionary<string, object> ToSQLParams()
         {
             return new Dictionary<string, object>() { { "customer", Customer }, { "description", Description } };

@@ -94,6 +94,7 @@
             Controls.Add(DescriptionInput);
             Controls.Add(CustomerInput);
             Name = "AddContractForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Přidat zakázku";
             KeyDown += OnKeyDown;
             ResumeLayout(false);

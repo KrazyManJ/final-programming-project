@@ -17,9 +17,8 @@ namespace final_programming_project.Objects
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
-        public Employee(int iD, string firstName, string lastName, DateTime birthDate, string email, string phoneNumber)
+        public Employee(string firstName, string lastName, DateTime birthDate, string email, string phoneNumber)
         {
-            ID = iD;
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
@@ -39,12 +38,7 @@ namespace final_programming_project.Objects
 
         public ListViewItem ToListViewItem()
         {
-            return new ListViewItem(new string[] { ID.ToString(), FirstName, LastName, BirthDate.ToShortDateString(), Email, PhoneNumber });
-        }
-
-        public string Query(string tablename)
-        {
-            return $"INSERT INTO {tablename} (firstname,lastname,birthdate,email,phonenumber) VALUES (@firstname,@lastname,@birthdate,@email,@phonenumber)";
+            return new ListViewItem(new string[] { ID.ToString(), FirstName, LastName, BirthDate.ToString("yyyy-MM-dd"), Email, PhoneNumber });
         }
 
         public Dictionary<string, object> ToSQLParams()

@@ -8,7 +8,7 @@ public partial class MainForm : Form
     public bool Logout { get; private set; }
 
     private readonly User user;
-    private readonly List<Contract> contracts = new List<Contract>();
+    private List<Contract> contracts = new List<Contract>();
 
     public MainForm(User user)
     {
@@ -25,11 +25,7 @@ public partial class MainForm : Form
 
     private void UpdateListView(bool sql = false)
     {
-        if (sql)
-        {
-            contracts.Clear();
-            contracts.AddRange(SQLManager.SelectAll<Contract>(TableName.contracts));
-        }
+        if (sql) contracts = SQLManager.SelectAll<Contract>(TableName.contracts);
         ContractsListView.Items.Clear();
         foreach (Contract contract in contracts)
         {

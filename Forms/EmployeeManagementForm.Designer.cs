@@ -35,20 +35,25 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
+            AddButton = new Button();
+            EditButton = new Button();
+            RemoveButton = new Button();
             SuspendLayout();
             // 
             // EmployeeListView
             // 
+            EmployeeListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             EmployeeListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
             EmployeeListView.FullRowSelect = true;
             EmployeeListView.GridLines = true;
             EmployeeListView.Location = new Point(12, 12);
             EmployeeListView.MultiSelect = false;
             EmployeeListView.Name = "EmployeeListView";
-            EmployeeListView.Size = new Size(776, 426);
+            EmployeeListView.Size = new Size(776, 391);
             EmployeeListView.TabIndex = 0;
             EmployeeListView.UseCompatibleStateImageBehavior = false;
             EmployeeListView.View = View.Details;
+            EmployeeListView.SelectedIndexChanged += EmployeeListView_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
@@ -79,11 +84,49 @@
             columnHeader6.Text = "Telefon";
             columnHeader6.Width = 150;
             // 
+            // AddButton
+            // 
+            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AddButton.Location = new Point(12, 409);
+            AddButton.Name = "AddButton";
+            AddButton.Size = new Size(170, 29);
+            AddButton.TabIndex = 1;
+            AddButton.Text = "Přidat Zaměstnance";
+            AddButton.UseVisualStyleBackColor = true;
+            AddButton.Click += AddButton_Click;
+            // 
+            // EditButton
+            // 
+            EditButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            EditButton.Enabled = false;
+            EditButton.Location = new Point(402, 409);
+            EditButton.Name = "EditButton";
+            EditButton.Size = new Size(190, 29);
+            EditButton.TabIndex = 2;
+            EditButton.Text = "Upravit Zaměstnance";
+            EditButton.UseVisualStyleBackColor = true;
+            EditButton.Click += EditButton_Click;
+            // 
+            // RemoveButton
+            // 
+            RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            RemoveButton.Enabled = false;
+            RemoveButton.Location = new Point(598, 409);
+            RemoveButton.Name = "RemoveButton";
+            RemoveButton.Size = new Size(190, 29);
+            RemoveButton.TabIndex = 3;
+            RemoveButton.Text = "Vymazat Zaměstnance";
+            RemoveButton.UseVisualStyleBackColor = true;
+            RemoveButton.Click += RemoveButton_Click;
+            // 
             // EmployeeManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(RemoveButton);
+            Controls.Add(EditButton);
+            Controls.Add(AddButton);
             Controls.Add(EmployeeListView);
             Name = "EmployeeManagementForm";
             Text = "Správa Zaměstnanců";
@@ -99,5 +142,8 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
+        private Button AddButton;
+        private Button EditButton;
+        private Button RemoveButton;
     }
 }

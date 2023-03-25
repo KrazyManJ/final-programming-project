@@ -26,7 +26,7 @@ namespace final_programming_project.Forms
 
         private void AddContract()
         {
-            SQLManager.Add(TableName.contracts, new Contract(CustomerInput.Text, DescriptionInput.Text));
+            SQLManager.Insert(TableName.contracts, new Contract(CustomerInput.Text, DescriptionInput.Text));
             Close();
         }
 
