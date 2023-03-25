@@ -30,7 +30,6 @@ namespace final_programming_project.Forms
             Close();
         }
 
-
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddContract();

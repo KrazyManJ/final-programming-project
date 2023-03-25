@@ -14,7 +14,11 @@ public partial class MainForm : Form
     {
         InitializeComponent();
         this.user = user;
-        if (!this.user.Role.Full_Perm) ManageUsersButton.Hide();
+        if (!this.user.Role.Full_Perm)
+        {
+            ManageUsersButton.Hide();
+            AddContractButton.Hide();
+        }
         UsernameLabel.Text = $"Pøihlášen jako \"{user.Name}\"";
         UpdateListView(true);
     }
