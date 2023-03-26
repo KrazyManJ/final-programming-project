@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace final_programming_project.Objects
 {
-    internal class WorkType : IListViewable, ISQLSerializable
+    internal class WorkType : IListViewable, ISQLNameDescObject<WorkType>
     {
 
         public int ID { get; set; }
@@ -37,9 +37,9 @@ namespace final_programming_project.Objects
         {
             return new Dictionary<string, object>()
             {
-                {"ID", ID.ToString()},
-                {"Name", Name},
-                {"Description", Description}
+                {"id", ID.ToString()},
+                {"name", Name},
+                {"description", Description}
             };
         }
     }

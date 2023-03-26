@@ -28,8 +28,9 @@ public static class SQLManager
     public static void Insert<T>(TableName name, T value) where T : ISQLSerializable
     {
         Dictionary<string,object> paramsdict = value.ToSQLParams();
+        paramsdict.Remove("id");
         string columnnames = string.Join(',', paramsdict.Keys);
-        string paramnames = string.Join(',', paramsdict.Keys.Select(k => '@' + k));
+        string paramnames = string.Join(',', paramsdict.Keys. Select(k => '@' + k));
         new SQLExecuter($"INSERT INTO {Quote(name.ToString())} ({columnnames}) VALUES ({paramnames})")
             .Parameters(paramsdict)
             .Execute();
@@ -127,7 +128,8 @@ public enum TableName
     users,
     roles,
     contracts,
-    employees
+    employees,
+    worktypes
 }
 
 public enum RegisterResponse

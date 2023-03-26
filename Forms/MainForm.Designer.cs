@@ -153,6 +153,7 @@ namespace final_programming_project.Forms
             WorkTypeMngButton.TabIndex = 8;
             WorkTypeMngButton.Text = "Správa pracovních činností";
             WorkTypeMngButton.UseVisualStyleBackColor = true;
+            WorkTypeMngButton.Click += WorkTypeMngButton_Click;
             // 
             // label1
             // 

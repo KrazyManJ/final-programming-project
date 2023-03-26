@@ -70,4 +70,5 @@ public partial class MainForm : Form
 
     private void EmployeeMngButton_Click(object sender, EventArgs e) => new EmployeeManagementForm().ShowDialog();
 
+    private void WorkTypeMngButton_Click(object sender, EventArgs e) => new WorkTypeManagementForm().ShowDialog();
 }

@@ -18,6 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Update="Forms\WorkTypeManagementForm.cs">
+          <SubType>Form</SubType>
+        </Compile>
         <Compile Update="Forms\UserInput\EditUserForm.cs">
             <SubType>Form</SubType>
         </Compile>
