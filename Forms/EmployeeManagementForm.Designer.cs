@@ -38,6 +38,8 @@
             AddButton = new Button();
             EditButton = new Button();
             RemoveButton = new Button();
+            SearchInput = new TextBox();
+            UpdateDataButton = new Button();
             SuspendLayout();
             // 
             // EmployeeListView
@@ -46,10 +48,10 @@
             EmployeeListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
             EmployeeListView.FullRowSelect = true;
             EmployeeListView.GridLines = true;
-            EmployeeListView.Location = new Point(12, 12);
+            EmployeeListView.Location = new Point(12, 45);
             EmployeeListView.MultiSelect = false;
             EmployeeListView.Name = "EmployeeListView";
-            EmployeeListView.Size = new Size(776, 391);
+            EmployeeListView.Size = new Size(776, 358);
             EmployeeListView.TabIndex = 0;
             EmployeeListView.UseCompatibleStateImageBehavior = false;
             EmployeeListView.View = View.Details;
@@ -119,11 +121,34 @@
             RemoveButton.UseVisualStyleBackColor = true;
             RemoveButton.Click += RemoveButton_Click;
             // 
+            // SearchInput
+            // 
+            SearchInput.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            SearchInput.Location = new Point(12, 12);
+            SearchInput.Name = "SearchInput";
+            SearchInput.PlaceholderText = "Hledat...";
+            SearchInput.Size = new Size(625, 27);
+            SearchInput.TabIndex = 4;
+            SearchInput.TextChanged += SearchInput_TextChanged;
+            // 
+            // UpdateDataButton
+            // 
+            UpdateDataButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UpdateDataButton.Location = new Point(643, 11);
+            UpdateDataButton.Name = "UpdateDataButton";
+            UpdateDataButton.Size = new Size(145, 29);
+            UpdateDataButton.TabIndex = 5;
+            UpdateDataButton.Text = "Aktualizovat Data";
+            UpdateDataButton.UseVisualStyleBackColor = true;
+            UpdateDataButton.Click += UpdateDataButton_Click;
+            // 
             // EmployeeManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(UpdateDataButton);
+            Controls.Add(SearchInput);
             Controls.Add(RemoveButton);
             Controls.Add(EditButton);
             Controls.Add(AddButton);
@@ -131,6 +156,7 @@
             Name = "EmployeeManagementForm";
             Text = "Správa Zaměstnanců";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -145,5 +171,7 @@
         private Button AddButton;
         private Button EditButton;
         private Button RemoveButton;
+        private TextBox SearchInput;
+        private Button UpdateDataButton;
     }
 }

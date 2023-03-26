@@ -26,7 +26,13 @@ namespace final_programming_project.Forms
         {
             if (sql) employees = SQLManager.SelectAll<Employee>(TableName.employees);
             EmployeeListView.Items.Clear();
-            foreach (Employee employee in employees) EmployeeListView.Items.Add(employee.ToListViewItem());
+            foreach (Employee employee in employees)
+            {
+                if (
+                    new List<string>() { employee.FirstName, employee.LastName, employee.Email, employee.PhoneNumber }
+                    .Any(v => v.ToLower().Contains(SearchInput.Text.ToLower())))
+                    EmployeeListView.Items.Add(employee.ToListViewItem());
+            }
             UpdateButtonState();
         }
 
@@ -55,5 +61,9 @@ namespace final_programming_project.Forms
             SQLManager.RemoveById(TableName.employees, employees[EmployeeListView.SelectedIndices[0]].ID);
             UpdateListView(true);
         }
+
+        private void UpdateDataButton_Click(object sender, EventArgs e) => UpdateListView(true);
+
+        private void SearchInput_TextChanged(object sender, EventArgs e) => UpdateListView();
     }
 }

@@ -41,6 +41,8 @@ namespace final_programming_project.Forms
             UpdateDataButton = new Button();
             AddContractButton = new Button();
             EmployeeMngButton = new Button();
+            WorkTypeMngButton = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // UsernameLabel
@@ -64,7 +66,7 @@ namespace final_programming_project.Forms
             // ManageUsersButton
             // 
             ManageUsersButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ManageUsersButton.Location = new Point(651, 10);
+            ManageUsersButton.Location = new Point(767, 10);
             ManageUsersButton.Name = "ManageUsersButton";
             ManageUsersButton.Size = new Size(137, 29);
             ManageUsersButton.TabIndex = 2;
@@ -81,7 +83,7 @@ namespace final_programming_project.Forms
             ContractsListView.Location = new Point(12, 86);
             ContractsListView.MultiSelect = false;
             ContractsListView.Name = "ContractsListView";
-            ContractsListView.Size = new Size(776, 397);
+            ContractsListView.Size = new Size(892, 397);
             ContractsListView.TabIndex = 3;
             ContractsListView.UseCompatibleStateImageBehavior = false;
             ContractsListView.View = View.Details;
@@ -122,6 +124,7 @@ namespace final_programming_project.Forms
             // 
             // AddContractButton
             // 
+            AddContractButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddContractButton.Location = new Point(12, 489);
             AddContractButton.Name = "AddContractButton";
             AddContractButton.Size = new Size(179, 29);
@@ -132,7 +135,8 @@ namespace final_programming_project.Forms
             // 
             // EmployeeMngButton
             // 
-            EmployeeMngButton.Location = new Point(484, 10);
+            EmployeeMngButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            EmployeeMngButton.Location = new Point(600, 10);
             EmployeeMngButton.Name = "EmployeeMngButton";
             EmployeeMngButton.Size = new Size(161, 29);
             EmployeeMngButton.TabIndex = 7;
@@ -140,11 +144,34 @@ namespace final_programming_project.Forms
             EmployeeMngButton.UseVisualStyleBackColor = true;
             EmployeeMngButton.Click += EmployeeMngButton_Click;
             // 
+            // WorkTypeMngButton
+            // 
+            WorkTypeMngButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            WorkTypeMngButton.Location = new Point(394, 10);
+            WorkTypeMngButton.Name = "WorkTypeMngButton";
+            WorkTypeMngButton.Size = new Size(200, 29);
+            WorkTypeMngButton.TabIndex = 8;
+            WorkTypeMngButton.Text = "Správa pracovních činností";
+            WorkTypeMngButton.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(494, 64);
+            label1.Name = "label1";
+            label1.Size = new Size(410, 19);
+            label1.TabIndex = 9;
+            label1.Text = "Pro zobrazení detailů určité zakázky stačí na ní dvakrát kliknout";
+            label1.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 530);
+            ClientSize = new Size(916, 530);
+            Controls.Add(label1);
+            Controls.Add(WorkTypeMngButton);
             Controls.Add(EmployeeMngButton);
             Controls.Add(AddContractButton);
             Controls.Add(UpdateDataButton);
@@ -172,5 +199,7 @@ namespace final_programming_project.Forms
         private Button UpdateDataButton;
         private Button AddContractButton;
         private Button EmployeeMngButton;
+        private Button WorkTypeMngButton;
+        private Label label1;
     }
 }

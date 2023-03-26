@@ -18,6 +18,8 @@ public partial class MainForm : Form
         {
             ManageUsersButton.Hide();
             AddContractButton.Hide();
+            EmployeeMngButton.Hide();
+            WorkTypeMngButton.Hide();
         }
         UsernameLabel.Text = $"Pøihlášen jako \"{user.Name}\"";
         UpdateListView(true);
@@ -52,7 +54,7 @@ public partial class MainForm : Form
     }
 
     private void SearchInput_TextChanged(object sender, EventArgs e) => UpdateListView();
-    
+
 
     private void UpdateDataButton_Click(object sender, EventArgs e)
     {
@@ -67,5 +69,5 @@ public partial class MainForm : Form
     }
 
     private void EmployeeMngButton_Click(object sender, EventArgs e) => new EmployeeManagementForm().ShowDialog();
-    
+
 }

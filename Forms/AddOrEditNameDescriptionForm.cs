@@ -1,15 +1,4 @@
-﻿using final_programming_project.Objects;
-using final_programming_project.Source;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
+﻿using final_programming_project.Source;
 
 namespace final_programming_project.Forms
 {
@@ -60,10 +49,8 @@ namespace final_programming_project.Forms
             Close();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            Process();
-        }
+        private void ActionButton_Click(object sender, EventArgs e) => Process();
+        
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {

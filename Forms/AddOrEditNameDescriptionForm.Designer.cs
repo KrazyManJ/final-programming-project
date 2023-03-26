@@ -80,7 +80,7 @@
             ActionButton.Size = new Size(230, 29);
             ActionButton.TabIndex = 4;
             ActionButton.UseVisualStyleBackColor = true;
-            ActionButton.Click += AddButton_Click;
+            ActionButton.Click += ActionButton_Click;
             // 
             // AddOrEditNameDescriptionForm
             // 
