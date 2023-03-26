@@ -40,13 +40,13 @@ namespace final_programming_project.Forms
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            new AddOrEditEmployee().ShowDialog();
+            new AddOrEditEmployeeForm().ShowDialog();
             UpdateListView(true);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            new AddOrEditEmployee(employees[EmployeeListView.SelectedIndices[0]]).ShowDialog();
+            new AddOrEditEmployeeForm(employees[EmployeeListView.SelectedIndices[0]]).ShowDialog();
             UpdateListView(true);
         }
 

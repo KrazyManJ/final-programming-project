@@ -1,6 +1,6 @@
 ﻿namespace final_programming_project.Forms
 {
-    partial class AddContractForm
+    partial class AddOrEditNameDescriptionForm<T>
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            CustomerInput = new TextBox();
+            NameInput = new TextBox();
             DescriptionInput = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
-            AddButton = new Button();
+            NameLabel = new Label();
+            DescriptionLabel = new Label();
+            ActionButton = new Button();
             SuspendLayout();
             // 
-            // CustomerInput
+            // NameInput
             // 
-            CustomerInput.Location = new Point(33, 51);
-            CustomerInput.Name = "CustomerInput";
-            CustomerInput.Size = new Size(230, 27);
-            CustomerInput.TabIndex = 0;
-            CustomerInput.TextChanged += UpdateButtonStatus;
-            CustomerInput.KeyDown += OnKeyDown;
+            NameInput.Location = new Point(33, 51);
+            NameInput.Name = "NameInput";
+            NameInput.Size = new Size(230, 27);
+            NameInput.TabIndex = 0;
+            NameInput.TextChanged += UpdateButtonStatus;
+            NameInput.KeyDown += OnKeyDown;
             // 
             // DescriptionInput
             // 
@@ -54,48 +54,46 @@
             DescriptionInput.TextChanged += UpdateButtonStatus;
             DescriptionInput.KeyDown += OnKeyDown;
             // 
-            // label1
+            // NameLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(33, 28);
-            label1.Name = "label1";
-            label1.Size = new Size(67, 20);
-            label1.TabIndex = 2;
-            label1.Text = "Zákazník";
+            NameLabel.AutoSize = true;
+            NameLabel.Location = new Point(33, 28);
+            NameLabel.Name = "NameLabel";
+            NameLabel.Size = new Size(0, 20);
+            NameLabel.TabIndex = 2;
+            NameLabel.Text = "Název";
             // 
-            // label2
+            // DescriptionLabel
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(33, 93);
-            label2.Name = "label2";
-            label2.Size = new Size(99, 20);
-            label2.TabIndex = 3;
-            label2.Text = "Popis zakázky";
+            DescriptionLabel.AutoSize = true;
+            DescriptionLabel.Location = new Point(33, 93);
+            DescriptionLabel.Name = "DescriptionLabel";
+            DescriptionLabel.Size = new Size(0, 20);
+            DescriptionLabel.TabIndex = 3;
+            DescriptionLabel.Text = "Popis";
             // 
-            // AddButton
+            // ActionButton
             // 
-            AddButton.Enabled = false;
-            AddButton.Location = new Point(33, 260);
-            AddButton.Name = "AddButton";
-            AddButton.Size = new Size(230, 29);
-            AddButton.TabIndex = 4;
-            AddButton.Text = "Přidat";
-            AddButton.UseVisualStyleBackColor = true;
-            AddButton.Click += AddButton_Click;
+            ActionButton.Enabled = false;
+            ActionButton.Location = new Point(33, 260);
+            ActionButton.Name = "ActionButton";
+            ActionButton.Size = new Size(230, 29);
+            ActionButton.TabIndex = 4;
+            ActionButton.UseVisualStyleBackColor = true;
+            ActionButton.Click += AddButton_Click;
             // 
-            // AddContractForm
+            // AddOrEditNameDescriptionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(300, 318);
-            Controls.Add(AddButton);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(ActionButton);
+            Controls.Add(DescriptionLabel);
+            Controls.Add(NameLabel);
             Controls.Add(DescriptionInput);
-            Controls.Add(CustomerInput);
-            Name = "AddContractForm";
+            Controls.Add(NameInput);
+            Name = "AddOrEditNameDescriptionForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Přidat zakázku";
             KeyDown += OnKeyDown;
             ResumeLayout(false);
             PerformLayout();
@@ -103,10 +101,10 @@
 
         #endregion
 
-        private TextBox CustomerInput;
+        private TextBox NameInput;
         private TextBox DescriptionInput;
-        private Label label1;
-        private Label label2;
-        private Button AddButton;
+        private Label NameLabel;
+        private Label DescriptionLabel;
+        private Button ActionButton;
     }
 }

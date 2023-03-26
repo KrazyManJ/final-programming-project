@@ -8,35 +8,39 @@ using System.Threading.Tasks;
 
 namespace final_programming_project.Objects
 {
-    public class Contract : IListViewable, ISQLNameDescObject<Contract>
+    internal class WorkType : IListViewable, ISQLSerializable
     {
+
         public int ID { get; set; }
-        public string Customer { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
 
-        public string Name { get { return Customer; } set { Customer = value; } }
-
-        public Contract(string customer, string description)
+        public WorkType(string name, string description)
         {
-            Customer = customer;
+            Name = name;
             Description = description;
         }
 
-        public Contract(SqlDataReader reader)
-        {
+        public WorkType(SqlDataReader reader) 
+        { 
             ID = reader.GetInt32(0);
-            Customer = reader.GetString(1);
+            Name = reader.GetString(1);
             Description = reader.GetString(2);
         }
 
         public ListViewItem ToListViewItem()
         {
-            return new ListViewItem(new string[] { ID.ToString(), Customer, Description });
+            return new ListViewItem(new string[] { ID.ToString(), Name, Description });
         }
 
         public Dictionary<string, object> ToSQLParams()
         {
-            return new Dictionary<string, object>() { { "customer", Customer }, { "description", Description } };
+            return new Dictionary<string, object>()
+            {
+                {"ID", ID.ToString()},
+                {"Name", Name},
+                {"Description", Description}
+            };
         }
     }
 }

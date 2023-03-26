@@ -62,7 +62,7 @@ public partial class MainForm : Form
 
     private void AddContractButton_Click(object sender, EventArgs e)
     {
-        new AddContractForm().ShowDialog();
+        new AddOrEditNameDescriptionForm<Contract>("Pøidat zakázku", TableName.contracts).ShowDialog();
         UpdateListView(true);
     }
 

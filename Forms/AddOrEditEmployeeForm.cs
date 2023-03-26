@@ -12,17 +12,17 @@ using System.Windows.Forms;
 
 namespace final_programming_project.Forms
 {
-    public partial class AddOrEditEmployee : Form
+    public partial class AddOrEditEmployeeForm : Form
     {
         public Employee? Employee { get; set; } = null;
 
-        public AddOrEditEmployee()
+        public AddOrEditEmployeeForm()
         {
             InitializeComponent();
             Text = "Přidat zaměstnance";
             ActionButton.Text = "Přidat";
         }
-        public AddOrEditEmployee(Employee employee)
+        public AddOrEditEmployeeForm(Employee employee)
         {
             InitializeComponent();
             Text = "Upravit zaměstnance";

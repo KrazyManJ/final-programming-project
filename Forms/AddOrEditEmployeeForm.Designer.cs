@@ -1,6 +1,6 @@
 ﻿namespace final_programming_project.Forms
 {
-    partial class AddOrEditEmployee
+    partial class AddOrEditEmployeeForm
     {
         /// <summary>
         /// Required designer variable.
