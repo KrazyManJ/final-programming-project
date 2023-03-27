@@ -1,4 +1,4 @@
-﻿namespace final_programming_project.Objects;
+﻿namespace final_programming_project.Source;
 
 internal interface IListViewable
 {

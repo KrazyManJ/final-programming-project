@@ -19,6 +19,8 @@ namespace final_programming_project.Forms
         {
             InitializeComponent();
             Contract = contract;
+            TitleLabel.Text = contract.Name;
+            DescriptionLabel.Text = contract.Description;
         }
     }
 }

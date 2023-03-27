@@ -129,7 +129,8 @@ public enum TableName
     roles,
     contracts,
     employees,
-    worktypes
+    worktypes,
+    workhours
 }
 
 public enum RegisterResponse

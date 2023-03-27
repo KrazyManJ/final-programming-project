@@ -1,4 +1,6 @@
-﻿namespace final_programming_project.Objects;
+﻿using final_programming_project.Objects;
+
+namespace final_programming_project.Source;
 
 public class LoginResponse
 {

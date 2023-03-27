@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace final_programming_project.Objects
 {
-    internal class WorkType : IListViewable, ISQLNameDescObject<WorkType>
+    public class WorkType : IListViewable, ISQLNameDescObject<WorkType>
     {
 
         public int ID { get; set; }
