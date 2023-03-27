@@ -1,16 +1,49 @@
 ﻿using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace final_programming_project.Toolbox;
 
+public class AlphanumericComparer : IComparer<string>
+{
+    public int Compare(string? x, string? y)
+    {
+        string[] partsX = Regex.Split(x, "([0-9]+)");
+        string[] partsY = Regex.Split(y, "([0-9]+)");
+
+        int i = 0;
+        while (i < partsX.Length && i < partsY.Length)
+        {
+            if (partsX[i] != partsY[i])
+            {
+                if (int.TryParse(partsX[i], out int resultX) && int.TryParse(partsY[i], out int resultY))
+                {
+                    return resultX.CompareTo(resultY);
+                }
+                return string.Compare(partsX[i], partsY[i], StringComparison.OrdinalIgnoreCase);
+            }
+            i++;
+        }
+
+        if (partsX.Length != partsY.Length)
+        {
+            return partsX.Length.CompareTo(partsY.Length);
+        }
+        else
+        {
+            return string.Compare(x, y, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+}
+
 public class ListViewColumnSorter : IComparer
 {
-    private readonly CaseInsensitiveComparer ObjectCompare;
+    private readonly AlphanumericComparer ObjectCompare;
 
     public ListViewColumnSorter()
     {
         SortColumn = 0;
         Order = SortOrder.None;
-        ObjectCompare = new CaseInsensitiveComparer();
+        ObjectCompare = new AlphanumericComparer();
     }
 
     public int SortColumn { set; get; }

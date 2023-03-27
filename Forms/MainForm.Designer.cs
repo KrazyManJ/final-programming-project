@@ -58,7 +58,7 @@ namespace final_programming_project.Forms
             LogoutButton.Location = new Point(12, 10);
             LogoutButton.Name = "LogoutButton";
             LogoutButton.Size = new Size(94, 29);
-            LogoutButton.TabIndex = 1;
+            LogoutButton.TabIndex = 0;
             LogoutButton.Text = "Odhlásit se";
             LogoutButton.UseVisualStyleBackColor = true;
             LogoutButton.Click += LogoutButton_Click;
@@ -69,7 +69,7 @@ namespace final_programming_project.Forms
             ManageUsersButton.Location = new Point(767, 10);
             ManageUsersButton.Name = "ManageUsersButton";
             ManageUsersButton.Size = new Size(137, 29);
-            ManageUsersButton.TabIndex = 2;
+            ManageUsersButton.TabIndex = 3;
             ManageUsersButton.Text = "Správa uživatelů";
             ManageUsersButton.UseVisualStyleBackColor = true;
             ManageUsersButton.Click += ManageUsersButton_Click;
@@ -84,7 +84,7 @@ namespace final_programming_project.Forms
             ContractsListView.MultiSelect = false;
             ContractsListView.Name = "ContractsListView";
             ContractsListView.Size = new Size(892, 397);
-            ContractsListView.TabIndex = 3;
+            ContractsListView.TabIndex = 5;
             ContractsListView.UseCompatibleStateImageBehavior = false;
             ContractsListView.View = View.Details;
             ContractsListView.DoubleClick += ContractsListView_DoubleClick;
@@ -101,7 +101,7 @@ namespace final_programming_project.Forms
             // columnHeader3
             // 
             columnHeader3.Text = "Popis";
-            columnHeader3.Width = 300;
+            columnHeader3.Width = 600;
             // 
             // SearchInput
             // 
@@ -114,11 +114,11 @@ namespace final_programming_project.Forms
             // 
             // UpdateDataButton
             // 
-            UpdateDataButton.Location = new Point(278, 48);
+            UpdateDataButton.Location = new Point(700, 489);
             UpdateDataButton.Name = "UpdateDataButton";
-            UpdateDataButton.Size = new Size(117, 29);
-            UpdateDataButton.TabIndex = 5;
-            UpdateDataButton.Text = "Aktualizovat";
+            UpdateDataButton.Size = new Size(204, 29);
+            UpdateDataButton.TabIndex = 7;
+            UpdateDataButton.Text = "Aktualizovat Data";
             UpdateDataButton.UseVisualStyleBackColor = true;
             UpdateDataButton.Click += UpdateDataButton_Click;
             // 
@@ -139,7 +139,7 @@ namespace final_programming_project.Forms
             EmployeeMngButton.Location = new Point(600, 10);
             EmployeeMngButton.Name = "EmployeeMngButton";
             EmployeeMngButton.Size = new Size(161, 29);
-            EmployeeMngButton.TabIndex = 7;
+            EmployeeMngButton.TabIndex = 2;
             EmployeeMngButton.Text = "Správa zaměstnanců";
             EmployeeMngButton.UseVisualStyleBackColor = true;
             EmployeeMngButton.Click += EmployeeMngButton_Click;
@@ -150,7 +150,7 @@ namespace final_programming_project.Forms
             WorkTypeMngButton.Location = new Point(394, 10);
             WorkTypeMngButton.Name = "WorkTypeMngButton";
             WorkTypeMngButton.Size = new Size(200, 29);
-            WorkTypeMngButton.TabIndex = 8;
+            WorkTypeMngButton.TabIndex = 1;
             WorkTypeMngButton.Text = "Správa pracovních činností";
             WorkTypeMngButton.UseVisualStyleBackColor = true;
             WorkTypeMngButton.Click += WorkTypeMngButton_Click;
