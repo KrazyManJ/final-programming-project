@@ -30,14 +30,20 @@
         {
             TitleLabel = new Label();
             DescriptionLabel = new Label();
+            WorkHoursListView = new Toolbox.SortableListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             SuspendLayout();
             // 
             // TitleLabel
             // 
             TitleLabel.AutoSize = true;
+            TitleLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
             TitleLabel.Location = new Point(12, 9);
             TitleLabel.Name = "TitleLabel";
-            TitleLabel.Size = new Size(38, 20);
+            TitleLabel.Size = new Size(68, 35);
             TitleLabel.TabIndex = 0;
             TitleLabel.Text = "Title";
             // 
@@ -52,11 +58,45 @@
             DescriptionLabel.TabIndex = 1;
             DescriptionLabel.Text = "Description";
             // 
+            // WorkHoursListView
+            // 
+            WorkHoursListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            WorkHoursListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            WorkHoursListView.FullRowSelect = true;
+            WorkHoursListView.GridLines = true;
+            WorkHoursListView.Location = new Point(12, 79);
+            WorkHoursListView.MultiSelect = false;
+            WorkHoursListView.Name = "WorkHoursListView";
+            WorkHoursListView.Size = new Size(776, 359);
+            WorkHoursListView.TabIndex = 2;
+            WorkHoursListView.UseCompatibleStateImageBehavior = false;
+            WorkHoursListView.View = View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "ID";
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Zaměstnanec";
+            columnHeader2.Width = 200;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Pracovní činnost";
+            columnHeader3.Width = 200;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Odpracované hodiny";
+            columnHeader4.Width = 200;
+            // 
             // ContractForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(WorkHoursListView);
             Controls.Add(DescriptionLabel);
             Controls.Add(TitleLabel);
             Name = "ContractForm";
@@ -69,5 +109,10 @@
 
         private Label TitleLabel;
         private Label DescriptionLabel;
+        private Toolbox.SortableListView WorkHoursListView;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
     }
 }

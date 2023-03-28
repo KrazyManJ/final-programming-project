@@ -13,9 +13,8 @@ namespace final_programming_project.Objects
         public DateTime InsertDate { get; set; }
         public User InsertUser { get; set; }
 
-        public WorkHours(int iD, Employee employee, Contract contract, WorkType workType, int hours, User insertUser)
+        public WorkHours(Employee employee, Contract contract, WorkType workType, int hours, User insertUser)
         {
-            ID = iD;
             Employee = employee;
             Contract = contract;
             WorkType = workType;
@@ -40,7 +39,6 @@ namespace final_programming_project.Objects
             return new ListViewItem(new string[] {
                 ID.ToString(),
                 $"{Employee.FirstName} {Employee.LastName}",
-                Contract.Name,
                 WorkType.Name,
                 Hours.ToString()
             });

@@ -58,7 +58,8 @@ namespace final_programming_project.Forms
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            SQLManager.RemoveById(TableName.employees, employees[EmployeeListView.SelectedIndices[0]].ID);
+            MessageBox.Show(SQLManager.IsInWorkHours(WorkHoursIndexes.employee, employees[EmployeeListView.SelectedIndices[0]]) ? "is" : "isnt");
+            //SQLManager.RemoveById(TableName.employees, employees[EmployeeListView.SelectedIndices[0]].ID);
             UpdateListView(true);
         }
 

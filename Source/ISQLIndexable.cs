@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace final_programming_project.Source
 {
-    public interface ISQLSerializable : ISQLIndexable
+    public interface ISQLIndexable
     {
-        public Dictionary<string,object> ToSQLParams();
+        public int ID { get; set; }
     }
 }

@@ -114,6 +114,7 @@ namespace final_programming_project.Forms
             // 
             // UpdateDataButton
             // 
+            UpdateDataButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             UpdateDataButton.Location = new Point(700, 489);
             UpdateDataButton.Name = "UpdateDataButton";
             UpdateDataButton.Size = new Size(204, 29);
@@ -157,6 +158,7 @@ namespace final_programming_project.Forms
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point);
             label1.Location = new Point(494, 64);

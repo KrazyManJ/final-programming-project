@@ -69,7 +69,7 @@ public static class SQLManager
             .ExecuteReadFirst(r => (T)constructor.Invoke(new object[] { r }));
     }
 
-    // OTHERS
+    // USERS
 
     public static bool IsUserRegistered(string username)
     {
@@ -120,7 +120,32 @@ public static class SQLManager
         }
     }
 
+    //CONTRACTS
+
+    public static List<WorkHours> GetWorkHours(Contract contract)
+    {
+        ConstructorInfo? constructor = GetSQLCtor<WorkHours>();
+        if (constructor == null) return new List<WorkHours>();
+        return new SQLExecuter("SELECT * FROM workhours WHERE contract=@contract")
+            .Parameter("contract", contract.ID)
+            .ExecuteReadAll(r => (WorkHours)constructor.Invoke(new object[] { r }));
+    }
     
+    public static bool IsInWorkHours(WorkHoursIndexes columnname, ISQLIndexable indexable)
+    {
+        return new SQLExecuter($"SELECT * FROM workhours WHERE {Quote(columnname.ToString())}=@id")
+            .Parameter("id", indexable.ID)
+            .ExecuteReadAny();
+    }
+
+}
+
+public enum WorkHoursIndexes
+{
+    employee,
+    contract,
+    worktype,
+    insertuser
 }
 
 public enum TableName

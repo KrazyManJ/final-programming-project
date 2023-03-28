@@ -49,7 +49,7 @@ public partial class MainForm : Form
     {
         if (ContractsListView.SelectedItems.Count == 0) return;
 
-        new ContractForm(contracts[ContractsListView.SelectedIndices[0]]).ShowDialog();
+        new ContractForm(user, contracts[ContractsListView.SelectedIndices[0]]).ShowDialog();
     }
 
     private void SearchInput_TextChanged(object sender, EventArgs e) => UpdateListView();
