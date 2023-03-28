@@ -59,8 +59,17 @@ namespace final_programming_project.Forms
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            SQLManager.RemoveById(TableName.employees, worktypes[WorkTypeListView.SelectedIndices[0]].ID);
-            UpdateListView(true);
+            WorkType item = worktypes[WorkTypeListView.SelectedIndices[0]];
+            if (MSGBoxes.AskConfirm("Vymazání pracovní činnosti", $"Opravdu chcete vymazat pracovní činnost s ID '{item.ID}'?"))
+            {
+                if (SQLManager.IsInWorkHours(WorkHoursIndexes.worktype, item))
+                {
+                    MSGBoxes.Error("Pracovní činnost se nepodařilo vymazat, protože je spojen s tvorbou zápisů do zakázek.");
+                    return;
+                }
+                SQLManager.RemoveById(TableName.worktypes, item.ID);
+                UpdateListView(true);
+            }
         }
 
         private void UpdateDataButton_Click(object sender, EventArgs e) => UpdateListView(true);

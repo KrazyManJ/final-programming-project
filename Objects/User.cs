@@ -3,9 +3,9 @@ using final_programming_project.Source;
 
 namespace final_programming_project.Objects;
 
-public class User : IListViewable
+public class User : IListViewable, ISQLIndexable
 {
-    public int ID { get; } = -1;
+    public int ID { get; set; }
     public string Name { get; }
     public Role Role { get; }
 

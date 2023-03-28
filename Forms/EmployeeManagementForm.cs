@@ -1,14 +1,5 @@
 ﻿using final_programming_project.Objects;
 using final_programming_project.Source;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace final_programming_project.Forms
 {
@@ -58,9 +49,17 @@ namespace final_programming_project.Forms
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(SQLManager.IsInWorkHours(WorkHoursIndexes.employee, employees[EmployeeListView.SelectedIndices[0]]) ? "is" : "isnt");
-            //SQLManager.RemoveById(TableName.employees, employees[EmployeeListView.SelectedIndices[0]].ID);
-            UpdateListView(true);
+            Employee item = employees[EmployeeListView.SelectedIndices[0]];
+            if (MSGBoxes.AskConfirm("Vymazání zaměstnance", $"Opravdu chcete vymazat zaměstnance s ID '{item.ID}'?"))
+            {
+                if (SQLManager.IsInWorkHours(WorkHoursIndexes.employee, item))
+                {
+                    MSGBoxes.Error("Zaměstance se nepodařilo vymazat, protože je spojen s tvorbou zápisů do zakázek.");
+                    return;
+                }
+                SQLManager.RemoveById(TableName.employees, item.ID);
+                UpdateListView(true);
+            }                
         }
 
         private void UpdateDataButton_Click(object sender, EventArgs e) => UpdateListView(true);

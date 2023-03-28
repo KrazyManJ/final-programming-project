@@ -47,17 +47,15 @@ public partial class UserManagementForm : Form
 
     private void RemoveBtn_Click(object sender, EventArgs e)
     {
-        if (UserListView.SelectedIndices.Count == 0) return;
-        var item = UserListView.SelectedItems[0];
-        var response = MessageBox.Show(
-            "Opravdu chcete vymazat uživatele s ID '" + item.Text + "'?",
-            "Vymazání uživatele",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning
-        );
-        if (response == DialogResult.Yes)
+        User item = users[UserListView.SelectedIndices[0]];
+        if (MSGBoxes.AskConfirm("Vymazání uživatele", $"Opravdu chcete vymazat uživatele s ID '{item.ID}'?"))
         {
-            SQLManager.RemoveById(TableName.users, int.Parse(item.Text));
+            if (SQLManager.IsInWorkHours(WorkHoursIndexes.insertuser,item))
+            {
+                MSGBoxes.Error("Uživatele se nepodařilo vymazat, protože je spojen s tvorbou zápisů do zakázek.");
+                return;
+            }
+            SQLManager.RemoveById(TableName.users, item.ID);
             UpdateUserView(true);
         }
     }
