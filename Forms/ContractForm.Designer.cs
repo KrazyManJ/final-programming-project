@@ -35,6 +35,8 @@
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
+            EditContractInfoButton = new Button();
+            UpdateDataButton = new Button();
             SuspendLayout();
             // 
             // TitleLabel
@@ -64,10 +66,10 @@
             WorkHoursListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             WorkHoursListView.FullRowSelect = true;
             WorkHoursListView.GridLines = true;
-            WorkHoursListView.Location = new Point(12, 79);
+            WorkHoursListView.Location = new Point(12, 81);
             WorkHoursListView.MultiSelect = false;
             WorkHoursListView.Name = "WorkHoursListView";
-            WorkHoursListView.Size = new Size(776, 359);
+            WorkHoursListView.Size = new Size(776, 322);
             WorkHoursListView.TabIndex = 2;
             WorkHoursListView.UseCompatibleStateImageBehavior = false;
             WorkHoursListView.View = View.Details;
@@ -91,16 +93,39 @@
             columnHeader4.Text = "Odpracované hodiny";
             columnHeader4.Width = 200;
             // 
+            // EditContractInfoButton
+            // 
+            EditContractInfoButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            EditContractInfoButton.Location = new Point(584, 9);
+            EditContractInfoButton.Name = "EditContractInfoButton";
+            EditContractInfoButton.Size = new Size(204, 29);
+            EditContractInfoButton.TabIndex = 3;
+            EditContractInfoButton.Text = "Upravit informace zakázky";
+            EditContractInfoButton.UseVisualStyleBackColor = true;
+            EditContractInfoButton.Click += EditContractInfoButton_Click;
+            // 
+            // UpdateDataButton
+            // 
+            UpdateDataButton.Location = new Point(612, 409);
+            UpdateDataButton.Name = "UpdateDataButton";
+            UpdateDataButton.Size = new Size(176, 29);
+            UpdateDataButton.TabIndex = 4;
+            UpdateDataButton.Text = "Aktualizovat Data";
+            UpdateDataButton.UseVisualStyleBackColor = true;
+            UpdateDataButton.Click += UpdateDataButton_Click;
+            // 
             // ContractForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(UpdateDataButton);
+            Controls.Add(EditContractInfoButton);
             Controls.Add(WorkHoursListView);
             Controls.Add(DescriptionLabel);
             Controls.Add(TitleLabel);
             Name = "ContractForm";
-            Text = "ContractForm";
+            Text = "Podrobnosti Zakázky";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -114,5 +139,7 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
+        private Button EditContractInfoButton;
+        private Button UpdateDataButton;
     }
 }

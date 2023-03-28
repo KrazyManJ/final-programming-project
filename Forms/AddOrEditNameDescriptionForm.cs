@@ -37,15 +37,9 @@ namespace final_programming_project.Forms
         {
             T? value = ISQLNameDescObject<T>.Construct(NameInput.Text, DescriptionInput.Text);
             if (value == null) return;
-            if (Value == null)
-            {
-                SQLManager.Insert(Table, value);
-            }
-            else
-            {
-                SQLManager.Update(Table, Value.ID, value);
-            }
-            
+            if (Value == null) SQLManager.Insert(Table, value);
+            else SQLManager.Update(Table, Value.ID, value);
+            Value = value;
             Close();
         }
 

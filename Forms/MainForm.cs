@@ -51,6 +51,7 @@ public partial class MainForm : Form
         if (ContractsListView.SelectedItems.Count == 0) return;
 
         new ContractForm(user, contracts[ContractsListView.SelectedIndices[0]]).ShowDialog();
+        UpdateListView(true);
     }
 
     private void SearchInput_TextChanged(object sender, EventArgs e) => UpdateListView();
