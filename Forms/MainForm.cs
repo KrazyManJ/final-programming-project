@@ -20,6 +20,7 @@ public partial class MainForm : Form
             AddContractButton.Hide();
             EmployeeMngButton.Hide();
             WorkTypeMngButton.Hide();
+            RemoveContractButton.Hide();
         }
         UsernameLabel.Text = $"Pøihlášen jako \"{user.Name}\"";
         UpdateListView(true);
@@ -70,4 +71,21 @@ public partial class MainForm : Form
     private void EmployeeMngButton_Click(object sender, EventArgs e) => new EmployeeManagementForm().ShowDialog();
 
     private void WorkTypeMngButton_Click(object sender, EventArgs e) => new WorkTypeManagementForm().ShowDialog();
+
+    private void ContractsListView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        RemoveContractButton.Enabled = ContractsListView.SelectedItems.Count == 1;
+    }
+
+    private void RemoveContractButton_Click(object sender, EventArgs e)
+    {
+        Contract contract = contracts[ContractsListView.SelectedIndices[0]];
+        string FIRST_LINE = $"Jste si opravdu jisti, že chcete vymazat zakázku s ID \"{contract.ID}\"?";
+        string SECOND_LINE = $"Smazáním této zakázky také smažete všechny její záznamy!";
+        if (MSGBoxes.AskConfirm("Vymazání zakázky", $"{FIRST_LINE}\n\n{SECOND_LINE}"))
+        {
+            SQLManager.RemoveContract(contract);
+            UpdateListView(true);
+        }
+    }
 }

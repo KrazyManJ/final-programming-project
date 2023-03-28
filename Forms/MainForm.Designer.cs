@@ -43,6 +43,7 @@ namespace final_programming_project.Forms
             EmployeeMngButton = new Button();
             WorkTypeMngButton = new Button();
             label1 = new Label();
+            RemoveContractButton = new Button();
             SuspendLayout();
             // 
             // UsernameLabel
@@ -87,6 +88,7 @@ namespace final_programming_project.Forms
             ContractsListView.TabIndex = 5;
             ContractsListView.UseCompatibleStateImageBehavior = false;
             ContractsListView.View = View.Details;
+            ContractsListView.SelectedIndexChanged += ContractsListView_SelectedIndexChanged;
             ContractsListView.DoubleClick += ContractsListView_DoubleClick;
             // 
             // columnHeader1
@@ -115,9 +117,9 @@ namespace final_programming_project.Forms
             // UpdateDataButton
             // 
             UpdateDataButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            UpdateDataButton.Location = new Point(700, 489);
+            UpdateDataButton.Location = new Point(767, 489);
             UpdateDataButton.Name = "UpdateDataButton";
-            UpdateDataButton.Size = new Size(204, 29);
+            UpdateDataButton.Size = new Size(137, 29);
             UpdateDataButton.TabIndex = 7;
             UpdateDataButton.Text = "Aktualizovat Data";
             UpdateDataButton.UseVisualStyleBackColor = true;
@@ -128,7 +130,7 @@ namespace final_programming_project.Forms
             AddContractButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddContractButton.Location = new Point(12, 489);
             AddContractButton.Name = "AddContractButton";
-            AddContractButton.Size = new Size(179, 29);
+            AddContractButton.Size = new Size(136, 29);
             AddContractButton.TabIndex = 6;
             AddContractButton.Text = "Přidat zakázku";
             AddContractButton.UseVisualStyleBackColor = true;
@@ -168,11 +170,24 @@ namespace final_programming_project.Forms
             label1.Text = "Pro zobrazení detailů určité zakázky stačí na ní dvakrát kliknout";
             label1.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // RemoveContractButton
+            // 
+            RemoveContractButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            RemoveContractButton.Enabled = false;
+            RemoveContractButton.Location = new Point(622, 489);
+            RemoveContractButton.Name = "RemoveContractButton";
+            RemoveContractButton.Size = new Size(139, 29);
+            RemoveContractButton.TabIndex = 10;
+            RemoveContractButton.Text = "Odebrat zakázku";
+            RemoveContractButton.UseVisualStyleBackColor = true;
+            RemoveContractButton.Click += RemoveContractButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(916, 530);
+            Controls.Add(RemoveContractButton);
             Controls.Add(label1);
             Controls.Add(WorkTypeMngButton);
             Controls.Add(EmployeeMngButton);
@@ -204,5 +219,6 @@ namespace final_programming_project.Forms
         private Button EmployeeMngButton;
         private Button WorkTypeMngButton;
         private Label label1;
+        private Button RemoveContractButton;
     }
 }

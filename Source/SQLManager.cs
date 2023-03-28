@@ -138,6 +138,13 @@ public static class SQLManager
             .ExecuteReadAny();
     }
 
+    public static void RemoveContract(Contract contract)
+    {
+        new SQLExecuter("DELETE FROM workhours WHERE contract=@id;DELETE FROM contracts WHERE id=@id")
+            .Parameter("id", contract.ID)
+            .Execute();
+    }
+
 }
 
 public enum WorkHoursIndexes
