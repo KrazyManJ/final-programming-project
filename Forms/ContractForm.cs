@@ -41,6 +41,18 @@ namespace final_programming_project.Forms
         public void UpdateButtonState()
         {
             EditWorkHoursButton.Enabled = WorkHoursListView.SelectedIndices.Count == 1;
+            if (WorkHoursListView.SelectedIndices.Count == 1)
+            {
+                WorkHours workHours = WorkHoursList[WorkHoursListView.SelectedIndices[0]];
+                if (LoggedUser.Role.Full_Perm)
+                {
+                    RemoveWorkHoursButton.Enabled = true;
+                }
+                else
+                {
+                    RemoveWorkHoursButton.Enabled = workHours.InsertUser.ID == LoggedUser.ID && workHours.InsertDate.Date == DateTime.Now.Date;
+                }
+            }
         }
 
         private void EditContractInfoButton_Click(object sender, EventArgs e)
@@ -71,6 +83,16 @@ namespace final_programming_project.Forms
         private void WorkHoursListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateButtonState();
+        }
+
+        private void RemoveWorkHoursButton_Click(object sender, EventArgs e)
+        {
+            WorkHours workHours = WorkHoursList[WorkHoursListView.SelectedIndices[0]];
+            if (MSGBoxes.AskConfirm("Odstranění záznamu", $"Opravdu chcete odstranit záznam s ID \"{workHours.ID}\""))
+            {
+                SQLManager.RemoveById(TableName.workhours, workHours.ID);
+                UpdateButtonState();
+            }
         }
     }
 }

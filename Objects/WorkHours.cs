@@ -42,7 +42,8 @@ namespace final_programming_project.Objects
                 $"{Employee.FirstName} {Employee.LastName}",
                 Hours.ToString(),
                 WorkType.Name,
-                WorkType.Description
+                WorkType.Description,
+                InsertUser.Name
             });
         }
 

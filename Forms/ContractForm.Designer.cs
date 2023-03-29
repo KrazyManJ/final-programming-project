@@ -41,6 +41,8 @@
             UpdateDataButton = new Button();
             AddWorkHoursButton = new Button();
             EditWorkHoursButton = new Button();
+            RemoveWorkHoursButton = new Button();
+            columnHeader7 = new ColumnHeader();
             SuspendLayout();
             // 
             // TitleLabel
@@ -67,7 +69,7 @@
             // WorkHoursListView
             // 
             WorkHoursListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            WorkHoursListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader6, columnHeader2, columnHeader4, columnHeader3, columnHeader5 });
+            WorkHoursListView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader6, columnHeader2, columnHeader4, columnHeader3, columnHeader5, columnHeader7 });
             WorkHoursListView.FullRowSelect = true;
             WorkHoursListView.GridLines = true;
             WorkHoursListView.Location = new Point(12, 81);
@@ -106,7 +108,7 @@
             // columnHeader5
             // 
             columnHeader5.Text = "Popis Pracovní Činnosti";
-            columnHeader5.Width = 350;
+            columnHeader5.Width = 250;
             // 
             // EditContractInfoButton
             // 
@@ -134,7 +136,7 @@
             // 
             AddWorkHoursButton.Location = new Point(12, 409);
             AddWorkHoursButton.Name = "AddWorkHoursButton";
-            AddWorkHoursButton.Size = new Size(129, 29);
+            AddWorkHoursButton.Size = new Size(154, 29);
             AddWorkHoursButton.TabIndex = 5;
             AddWorkHoursButton.Text = "Přidat záznam";
             AddWorkHoursButton.UseVisualStyleBackColor = true;
@@ -143,19 +145,36 @@
             // EditWorkHoursButton
             // 
             EditWorkHoursButton.Enabled = false;
-            EditWorkHoursButton.Location = new Point(147, 409);
+            EditWorkHoursButton.Location = new Point(332, 409);
             EditWorkHoursButton.Name = "EditWorkHoursButton";
-            EditWorkHoursButton.Size = new Size(129, 29);
+            EditWorkHoursButton.Size = new Size(154, 29);
             EditWorkHoursButton.TabIndex = 6;
             EditWorkHoursButton.Text = "Upravit záznam";
             EditWorkHoursButton.UseVisualStyleBackColor = true;
             EditWorkHoursButton.Click += EditWorkHoursButton_Click;
+            // 
+            // RemoveWorkHoursButton
+            // 
+            RemoveWorkHoursButton.Enabled = false;
+            RemoveWorkHoursButton.Location = new Point(172, 409);
+            RemoveWorkHoursButton.Name = "RemoveWorkHoursButton";
+            RemoveWorkHoursButton.Size = new Size(154, 29);
+            RemoveWorkHoursButton.TabIndex = 7;
+            RemoveWorkHoursButton.Text = "Odstranit záznam";
+            RemoveWorkHoursButton.UseVisualStyleBackColor = true;
+            RemoveWorkHoursButton.Click += RemoveWorkHoursButton_Click;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Zapsal";
+            columnHeader7.Width = 100;
             // 
             // ContractForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(979, 450);
+            Controls.Add(RemoveWorkHoursButton);
             Controls.Add(EditWorkHoursButton);
             Controls.Add(AddWorkHoursButton);
             Controls.Add(UpdateDataButton);
@@ -184,5 +203,7 @@
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
         private Button EditWorkHoursButton;
+        private Button RemoveWorkHoursButton;
+        private ColumnHeader columnHeader7;
     }
 }
