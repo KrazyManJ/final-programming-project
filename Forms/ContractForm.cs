@@ -20,6 +20,7 @@ namespace final_programming_project.Forms
             if (!loggedUser.Role.Full_Perm)
             {
                 EditContractInfoButton.Hide();
+                EditWorkHoursButton.Hide();
             }
         }
 
@@ -28,12 +29,18 @@ namespace final_programming_project.Forms
             if (sql) WorkHoursList = SQLManager.GetWorkHours(Contract);
             WorkHoursListView.Items.Clear();
             foreach (WorkHours workHours in WorkHoursList) WorkHoursListView.Items.Add(workHours.ToListViewItem());
+            UpdateButtonState();
         }
 
         public void UpdateTitleAndDescription()
         {
             TitleLabel.Text = Contract.Name;
             DescriptionLabel.Text = Contract.Description;
+        }
+
+        public void UpdateButtonState()
+        {
+            EditWorkHoursButton.Enabled = WorkHoursListView.SelectedIndices.Count == 1;
         }
 
         private void EditContractInfoButton_Click(object sender, EventArgs e)
@@ -48,5 +55,22 @@ namespace final_programming_project.Forms
         }
 
         private void UpdateDataButton_Click(object sender, EventArgs e) => UpdateWorkHoursListView(true);
+
+        private void AddWorkHoursButton_Click(object sender, EventArgs e)
+        {
+            new AddOrEditWorkHoursForms(Contract, LoggedUser).ShowDialog();
+            UpdateWorkHoursListView(true);
+        }
+
+        private void EditWorkHoursButton_Click(object sender, EventArgs e)
+        {
+            new AddOrEditWorkHoursForms(Contract, LoggedUser, WorkHoursList[WorkHoursListView.SelectedIndices[0]]).ShowDialog();
+            UpdateWorkHoursListView(true);
+        }
+
+        private void WorkHoursListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateButtonState();
+        }
     }
 }

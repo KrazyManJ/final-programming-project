@@ -38,9 +38,11 @@ namespace final_programming_project.Objects
         {
             return new ListViewItem(new string[] {
                 ID.ToString(),
+                InsertDate.ToString("yyyy-MM-dd"),
                 $"{Employee.FirstName} {Employee.LastName}",
+                Hours.ToString(),
                 WorkType.Name,
-                Hours.ToString()
+                WorkType.Description
             });
         }
 
@@ -54,7 +56,7 @@ namespace final_programming_project.Objects
                 { "worktype", WorkType.ID },
                 { "hours", Hours },
                 { "insertdate", InsertDate },
-                { "insertuser", InsertUser }
+                { "insertuser", InsertUser.ID }
             };
         }
     }

@@ -39,6 +39,7 @@ public static class SQLManager
     public static void Update<T>(TableName name, int id, T value) where T : ISQLSerializable
     {
         Dictionary<string, object> paramsdict = value.ToSQLParams();
+        paramsdict.Remove("id");
         string updateString = string.Join(",", paramsdict.Keys.Select(k => $"{k}=@{k}"));
         new SQLExecuter($"UPDATE {Quote(name.ToString())} SET {updateString} WHERE id=@id")
             .Parameters(paramsdict)
