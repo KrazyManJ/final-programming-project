@@ -6,4 +6,4 @@
     [birthdate] DATE NOT NULL, 
     [email] NVARCHAR(50) NOT NULL, 
     [phonenumber] NVARCHAR(50) NOT NULL
-)
+);

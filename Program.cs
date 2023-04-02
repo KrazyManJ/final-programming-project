@@ -1,4 +1,6 @@
 using final_programming_project.Forms;
+using final_programming_project.Objects;
+using final_programming_project.Source;
 
 namespace final_programming_project;
 
@@ -8,6 +10,12 @@ internal static class Program
     public static void Main()
     {
         ApplicationConfiguration.Initialize();
+
+        if (SQLManager.SelectAll<User>(TableName.users).Count == 0)
+        {
+            SQLManager.RegisterUser("admin", "root", "admin");
+            SQLManager.RegisterUser("guest", "123", null);
+        }
         bool login;
         do
         {

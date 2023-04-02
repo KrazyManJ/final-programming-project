@@ -7,4 +7,4 @@
     [hours] INT NOT NULL, 
     [insertdate] DATE NOT NULL, 
     [insertuser] INT NOT NULL FOREIGN KEY REFERENCES users(id),
-)
+);

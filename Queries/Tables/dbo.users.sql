@@ -10,4 +10,3 @@
     UNIQUE NONCLUSTERED ([name] ASC),
     FOREIGN KEY ([role]) REFERENCES [dbo].[roles] ([id])
 );
-

@@ -6,4 +6,3 @@
     PRIMARY KEY CLUSTERED ([id] ASC),
     UNIQUE NONCLUSTERED ([name] ASC)
 );
-
